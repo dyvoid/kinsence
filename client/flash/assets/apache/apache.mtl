@@ -1,0 +1,272 @@
+# Blender MTL File: 'apache.blend'
+# Material Count: 23
+newmtl 70mm_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.207000 0.207000 0.207000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\70mm.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl Ammo
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.172560 0.153760 0.141200
+Ks 0.900000 0.900000 0.900000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump maps\Ammo.jpg
+
+
+newmtl Black_tire
+Ns 25.490196
+Ka 0.000000 0.000000 0.000000
+Kd 0.100400 0.100400 0.100400
+Ks 0.350000 0.350000 0.350000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl Clear_blue
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.106640 0.730960 0.354480
+Ks 0.360000 0.360000 0.360000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl Conopi_Textura.jpg
+Ns 13.725490
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Textura.jpg
+map_Bump maps\Conopi.jpg
+map_Ka maps\Textura.jpg
+
+
+newmtl Darkgreen_Textura.jpg
+Ns 13.725490
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Textura.jpg
+map_Ka maps\Textura.jpg
+
+
+newmtl Flatblack
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.037680 0.037680 0.037680
+Ks 0.190000 0.190000 0.190000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl Fuselage2_Tex__8_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.228200 0.228200 0.228200
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__8_Mask.tga
+map_Bump maps\Leftbump.jpg
+map_Ka maps\Tex__8_Mask.tga
+
+
+newmtl Fuselage_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\Leftbump.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl Greenbas_Textura.jpg
+Ns 13.725490
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Textura.jpg
+map_Ka maps\Textura.jpg
+
+
+newmtl Gun_metal
+Ns 78.431373
+Ka 0.000000 0.000000 0.000000
+Kd 0.172560 0.153760 0.141200
+Ks 0.900000 0.900000 0.900000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl Material__83_Textura.jpg
+Ns 13.725490
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Textura.jpg
+map_Bump maps\Conopit.jpg
+map_Ka maps\Textura.jpg
+
+
+newmtl Metalic
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.188240 0.169440 0.153760
+Ks 0.920000 0.920000 0.920000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump maps\Tur3bump.jpg
+
+
+newmtl Red_Light.jpg
+Ns 17.647059
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.930000 0.930000 0.930000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Light.jpg
+map_Bump maps\Light.jpg
+map_Ka maps\Light.jpg
+
+
+newmtl Rotor
+Ns 29.411765
+Ka 0.000000 0.000000 0.000000
+Kd 0.047040 0.040800 0.000000
+Ks 0.920000 0.920000 0.920000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump maps\Rotor.jpg
+
+
+newmtl Side_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.207000 0.207000 0.207000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\Sidebump.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl Silver_Deep
+Ns 66.666667
+Ka 0.000000 0.000000 0.000000
+Kd 0.398400 0.357680 0.323120
+Ks 0.900000 0.900000 0.900000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl T1_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\Tur1bump.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl T2_Tex__1_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__1_Mask.tga
+map_Bump maps\Tur2Bump.jpg
+map_Ka maps\Tex__1_Mask.tga
+
+
+newmtl Wing2_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.230000 0.230000 0.230000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\Wing2bum.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl Wing_Tex__2_Mask.tga
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.028240 0.078400 0.000000
+Ks 0.207000 0.207000 0.207000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd maps\Tex__2_Mask.tga
+map_Bump maps\Wingbum.jpg
+map_Ka maps\Tex__2_Mask.tga
+
+
+newmtl Yellow
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.784320 0.646240 0.000000
+Ks 0.570000 0.570000 0.570000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl glass
+Ns 45.098039
+Ka 0.000000 0.000000 0.000000
+Kd 0.069040 0.160000 0.072160
+Ks 0.846000 0.846000 0.846000
+Ni 1.000000
+d 0.330000
+illum 2
+
+
