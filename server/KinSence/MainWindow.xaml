@@ -1,0 +1,78 @@
+﻿<Window x:Class="UsMedia.KinSence.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KinSence" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" Closed="Window_Closed" Icon="/KinSence;component/kinsence.ico">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="0" />
+            <GradientStop Color="#b6c3d1" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <StackPanel Orientation="Vertical">
+        <Canvas Height="48">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#FFFFFFFF" Offset="0" />
+                    <GradientStop Color="#FFb6c3d1" Offset="0.5" />
+                    <GradientStop Color="#FFFFFFFF" Offset="1" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <Image Width="124" Height="50" Source="/KinSence;component/logo.png" Canvas.Left="20" Canvas.Top="8" />
+        </Canvas>
+        <StackPanel Height="Auto" Margin="20" Width="Auto"  Orientation="Horizontal">
+            <Canvas Width="14" Height="14">
+                <Ellipse Height="14" Name="indicatorRed" Stroke="Black" Width="14" OpacityMask="{x:Null}">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="Red" Offset="1" />
+                            <GradientStop Color="#FFFFAAAA" Offset="0" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Height="14" Name="indicatorOrange" OpacityMask="{x:Null}" Stroke="Black" Width="14" Visibility="Hidden">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="Orange" Offset="1" />
+                            <GradientStop Color="#FFFFD8AA" Offset="0" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Height="14" Name="indicatorGreen" OpacityMask="{x:Null}" Stroke="Black" Width="14" Visibility="Hidden">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="Green" Offset="1" />
+                            <GradientStop Color="#FFAAFFC4" Offset="0" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Canvas>
+            <Label Content="IP Address" Height="28" Foreground="Black" />
+            <TextBox Height="23" Name="inIPAddress" Width="120" Text="192.168.1.7" MaxLength="15" AutoWordSelection="True" />
+            <Label Content="Port" Height="28" Foreground="White" />
+            <TextBox Height="23" Name="inPort" Text="3000" Width="38" MaxLength="4" />
+            <Button Content="Start" Height="23" Name="startButton" Width="75" Margin="10 0 0 0" Click="startButton_Click" />
+            <Button Content="Stop" Height="23" Name="stopButton" Width="75" Margin="10 0 0 0" Click="stopButton_Click" IsEnabled="False" />
+        </StackPanel>
+        <Separator Background="#FF555555" Height="1" />
+        <StackPanel Orientation="Vertical" Margin="20">
+            <CheckBox Content="Show video streams" Height="16" Name="videoStreamsToggle" Foreground="Black" Margin="0 0 0 10" Unchecked="videoStreamsToggle_Unchecked" Checked="videoStreamsToggle_Checked" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Canvas Width="400" Height="300" Background="Black" Margin="0 0 10 0">
+                        <Image Width="400" Height="300" Name="video" ClipToBounds="True" />
+                        <Border BorderBrush="#FF555555" BorderThickness="1" Width="400" Height="300" />
+                    </Canvas>
+                    <Label FontSize="12" Focusable="False" Content="Video" HorizontalAlignment="Center" Foreground="Black" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Canvas Width="400" Height="300" Background="Black" Margin="10 0 0 0">
+                        <Canvas Width="400" Height="300" Name="skeleton" ClipToBounds="True" />
+                        <Border BorderBrush="#FF555555" BorderThickness="1" Width="400" Height="300"/>
+                    </Canvas>
+                    <Label FontSize="12" Focusable="False" Content="Skeleton" HorizontalAlignment="Center" Foreground="Black" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>

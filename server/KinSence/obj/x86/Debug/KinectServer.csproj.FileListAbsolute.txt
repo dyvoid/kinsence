@@ -1,0 +1,36 @@
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\bin\Debug\KinSence.exe.config
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\bin\Debug\KinSence.exe.manifest
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\bin\Debug\KinSence.application
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\bin\Debug\KinSence.exe
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\bin\Debug\KinSence.pdb
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\MainWindow.baml
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\MainWindow.g.cs
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\App.g.cs
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence_MarkupCompile.cache
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence.g.resources
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\UsMedia.KinectServer.Properties.Resources.resources
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence.exe.manifest
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence.application
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence.exe
+F:\Projects\ActionScript Library\sources\src\kinsence\server\KinectServer\obj\x86\Debug\KinSence.pdb
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\KinSence.exe.config
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence.exe
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence.pdb
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\KinSence.exe.manifest
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\KinSence.application
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\KinSence.exe
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\KinSence.pdb
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\MainWindow.baml
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\MainWindow.g.cs
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\App.g.cs
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence_MarkupCompile.cache
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence.g.resources
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence.exe.manifest
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\KinSence.application
+F:\Projects\KinSence\sources\server\KinectServer\obj\x86\Debug\UsMedia.KinSence.Properties.Resources.resources

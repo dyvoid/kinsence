@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
+  <asmv1:assemblyIdentity name="KinectServer.exe" version="1.0.0.2" publicKeyToken="be93491330fde207" language="en" processorArchitecture="x86" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="KinectServer" version="0.8.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="KinectServer.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INuiInstanceHelper.dll" size="41472">
+      <assemblyIdentity name="INuiInstanceHelper" version="0.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>9K1eW/mEoYh8zKC4vrp2HWSih+Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KinectServer.exe" size="37376">
+      <assemblyIdentity name="KinectServer" version="0.8.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>mMrS5Mte6NoiS19LFHN8Ou5RMFQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Research.Kinect.dll" size="55296">
+      <assemblyIdentity name="Microsoft.Research.Kinect" version="1.0.0.45" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>PLMrd51BZbkJsUp+D2iMDaIiASs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Speech.dll" size="756504">
+      <assemblyIdentity name="Microsoft.Speech" version="10.2.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>RaJhktZhOM9kZFG3I8qnjFm8Mq4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="348160">
+      <assemblyIdentity name="Newtonsoft.Json" version="4.0.2.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>FH+r7fNlVWQ8E4Beyap3fRTIUqY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="KinectServer.exe.config" size="173">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>xqBvqV4alVJ3tnDxWGj3XmRhdzQ=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=Blackline\Pieter" issuerKeyHash="332865ac3b3aff48a4ad1b2137f5f8c3108ffd3e" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>QCuKn1DqZFaJ/mYJ+ZWUlo+oxIk=</DigestValue></Reference></SignedInfo><SignatureValue>gkS62mKughMD+YLqjuE9dIrEPcNZxSxcJbxxZI+/qCPVbOvWZgOrN6pxX6IOtzbELkp9sE3b70ynubNEjZwtVC6VBU4sT/wzwf5oyy8HHRav0lAgBamCBpe0uCtYURnRM2USYpx2i7/S8Zfs3xJorgIparbW913KxMLy1VVTwSk=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>yrRihcP4tLQOBuPPp3sipbqliU/2SyC6Id/kX4EOOCXTYmOOK/C7CgrCYnCBVDfouTx+ibEJJ1z+g/+1v6O4vL12DecysCRQsJhVoxKTJ9WCxIGf48j64KQbp4axkMUndaABNDa293kUeVm69G936v34QJml+xK64IKqBuv2IIU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="89c4a88f969495f90966fe895664ea509f8a2b40" Description="" Url=""><as:assemblyIdentity name="KinectServer.exe" version="1.0.0.2" publicKeyToken="be93491330fde207" language="en" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Blackline\Pieter</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>Gt/NpBEklR17Hi/eqUo3DdkDpck=</DigestValue></Reference></SignedInfo><SignatureValue>OGk8u1DOplmLqB+2ZYRs5GjVaEBpJTz6dngbKEDvyHp5zaHpYbCOIiuIX5GrBdAGgEd0TyFFd0gj5a4LrYM1Jl+abJwKm52YLgVIp/1D09MsJfAiscPUWfAnrD26HaHHo9mp32abnfBYCjUk1/I4+kKsvdiJZWDX/xpMS/k/lVg=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>yrRihcP4tLQOBuPPp3sipbqliU/2SyC6Id/kX4EOOCXTYmOOK/C7CgrCYnCBVDfouTx+ibEJJ1z+g/+1v6O4vL12DecysCRQsJhVoxKTJ9WCxIGf48j64KQbp4axkMUndaABNDa293kUeVm69G936v34QJml+xK64IKqBuv2IIU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB2TCCAUKgAwIBAgIQEzyos1NjBpNHO4niimBkzDANBgkqhkiG9w0BAQUFADArMSkwJwYDVQQDHiAAQgBsAGEAYwBrAGwAaQBuAGUAXABQAGkAZQB0AGUAcjAeFw0xMTExMDgyMTU0MDVaFw0xMjExMDgwMzU0MDVaMCsxKTAnBgNVBAMeIABCAGwAYQBjAGsAbABpAG4AZQBcAFAAaQBlAHQAZQByMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKtGKFw/i0tA4G48+neyKluqWJT/ZLILoh3+RfgQ44JdNiY44r8LsKCsJicIFUN+i5PH6JsQknXP6D/7W/o7i8vXYN5zKwJFCwmFWjEpMn1YLEgZ/jyPrgpBunhrGQxSd1oAE0Nrb3eRR5Wbr0b3fq/fhAmaX7ErrggqoG6/YghQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAC92UeqtU0geIlLeko1IHCRjLbzEjDVyspePE5Pzu3/KWjvJAv2w96RvRbfeILOMXlX3WtFaLXAMYnWGq8r5Q7ikOxH1ShxUNYhEOYclHlkob4MIcpSxWfMMe2WphdO6tp9Nej8j+/UmRZ+525pHVqyGXn0hbLgeX82WdIc2havM</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

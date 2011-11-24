@@ -1,0 +1,15 @@
+F:\Projects\ActionScript Library\sources\src\kinsence\server\SkeletonTrackingModule\bin\Debug\SkeletonTracking.dll
+F:\Projects\ActionScript Library\sources\src\kinsence\server\SkeletonTrackingModule\bin\Debug\SkeletonTracking.pdb
+F:\Projects\ActionScript Library\sources\src\kinsence\server\SkeletonTrackingModule\obj\Debug\ResolveAssemblyReference.cache
+F:\Projects\ActionScript Library\sources\src\kinsence\server\SkeletonTrackingModule\obj\Debug\SkeletonTracking.dll
+F:\Projects\ActionScript Library\sources\src\kinsence\server\SkeletonTrackingModule\obj\Debug\SkeletonTracking.pdb
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\bin\Debug\SkeletonTracking.dll
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\bin\Debug\SkeletonTracking.pdb
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\bin\Debug\Newtonsoft.Json.dll
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\SkeletonTracking.dll
+F:\Projects\KinSence\sources\server\KinectServer\bin\Debug\SkeletonTracking.pdb
+F:\Projects\KinSence\sources\server\KinSence\bin\Debug\SkeletonTracking.dll
+F:\Projects\KinSence\sources\server\KinSence\bin\Debug\SkeletonTracking.pdb
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\obj\Debug\ResolveAssemblyReference.cache
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\obj\Debug\SkeletonTracking.dll
+F:\Projects\KinSence\sources\server\SkeletonTrackingModule\obj\Debug\SkeletonTracking.pdb
