@@ -11,7 +11,7 @@ package nl.usmedia.kinsence.modules.handtracking
      * @author Pieter van de Sluis
      */
 
-    [Event(name="HandControlEvent::HAND_TRACKING_UPDATE", type="nl.usmedia.kinsence.modules.handtracking.HandTrackingEvent")]
+    [Event(name="HandTrackingEvent::HAND_TRACKING_UPDATE", type="nl.usmedia.kinsence.modules.handtracking.HandTrackingEvent")]
 
     public class HandTrackingModule extends AbstractKinectModule
     {

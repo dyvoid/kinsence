@@ -24,10 +24,16 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
             this.w = w;
         }
 
-
         // ____________________________________________________________________________________________________
         // PUBLIC
 
+        public function fromObject( object:Object ):void
+        {
+            w = object.W;
+            x = object.X;
+            y = object.Y;
+            z = object.Z;
+        }
 
         // ____________________________________________________________________________________________________
         // PRIVATE
@@ -45,12 +51,5 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         // EVENT HANDLERS
 
 
-        public function fromObject( object:Object ):void
-        {
-            w = object.W;
-            x = object.X;
-            y = object.Y;
-            z = object.Z;
-        }
     }
 }

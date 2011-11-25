@@ -10,7 +10,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
 
         public var joints:Vector.<Joint>;
         public var position:KinSenceVector;
-        public var skeletonQuality:uint;
+        public var quality:uint;
         public var trackingID:int;
         public var trackingState:uint;
         public var userIndex:int;
@@ -39,7 +39,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
             position = new KinSenceVector();
             position.fromObject( object.Position );
 
-            skeletonQuality = object.SkeletonQuality;
+            quality = uint( object.Quality );
 
             trackingID = object.TrackingID;
 
