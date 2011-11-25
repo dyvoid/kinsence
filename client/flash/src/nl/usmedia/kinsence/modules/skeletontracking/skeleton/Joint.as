@@ -5,15 +5,23 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
      */
     public final class Joint
 	{
+        // ____________________________________________________________________________________________________
+        // PROPERTIES
+
 		public var id:uint;
         public var position:KinSenceVector;
         public var trackingState:uint;
 
-		public function Joint( ):void
+        // ____________________________________________________________________________________________________
+        // CONSTRUCTOR
+
+		public function Joint():void
 		{
 
 		}
 
+        // ____________________________________________________________________________________________________
+        // PUBLIC
 
         public function fromObject( object:Object ):void
         {
@@ -24,6 +32,23 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
 
             trackingState = object.TrackingState;
         }
+
+        // ____________________________________________________________________________________________________
+        // PRIVATE
+
+
+        // ____________________________________________________________________________________________________
+        // PROTECTED
+
+
+        // ____________________________________________________________________________________________________
+        // GETTERS / SETTERS
+
+
+        // ____________________________________________________________________________________________________
+        // EVENT HANDLERS
+
+
 
 	}
 }

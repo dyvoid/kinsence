@@ -79,6 +79,9 @@ package examples.fireball
         private var _cloudWidth:Number = 75;
         private var _cloudHeight:Number = 75;
 
+        private var _cloudsOffset1:Number = 0;
+        private var _cloudsOffset2:Number = 0;
+
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
@@ -117,12 +120,8 @@ package examples.fireball
             _kinSence = new KinSence();
             _kinSence.addEventListener( Event.CONNECT, connectHandler );
             _kinSence.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler );
-//            _kinSence.connect( "127.0.0.1", 3000 );
-            _kinSence.connect( "192.168.1.7", 3000 );
-
-            /*_skeletonTracking = new SkeletonTrackingModule();
-            _skeletonTracking.addEventListener( SkeletonTrackingEvent.SKELETON_TRACKING_UPDATE, skeletonTrackingUpdateHandler );
-            _kinSence.registerModule( _skeletonTracking );*/
+            _kinSence.connect( "127.0.0.1", 3000 );
+//            _kinSence.connect( "192.168.1.7", 3000 );
 
             _handTracking = new HandTrackingModule();
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
@@ -255,20 +254,6 @@ package examples.fireball
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS
 
-        /*private function skeletonTrackingUpdateHandler( e:SkeletonTrackingEvent ):void
-        {
-            for ( var i:int = 0; i < e.skeletonFrame.skeletons.length; i++ )
-            {
-                var skeletonData:SkeletonData = e.skeletonFrame.skeletons[i];
-
-                if ( skeletonData.trackingState == SkeletonTrackingState.Tracked )
-                {
-                    var handDistance:Number = calcVectorDistance( skeletonData.getJointByID(JointID.HAND_LEFT).position, skeletonData.getJointByID(JointID.HAND_RIGHT).position );
-                    _intensityTarget = _bounds.getRelativePosFromValue( handDistance );
-                }
-            }
-        }*/
-
         private function handTrackingUpdateHandler( e:HandTrackingEvent ):void
         {
             if ( e.handSets.length > 0 )
@@ -281,9 +266,6 @@ package examples.fireball
         }
 
 
-        private var cloudsOffset1:Number = 0;
-        private var cloudsOffset2:Number = 0;
-
         private function enterFrameHandler( e:Event ):void
         {
             fpsText.text = _fpsMeter.fps.toString();
@@ -294,13 +276,13 @@ package examples.fireball
             _clouds2.alpha = _intensity;
 
             var shiftAmount:Number = Math.floor( _intensity * ( _cloudHeight / 3 ) );
-            cloudsOffset1 = ( cloudsOffset1 + shiftAmount ) % _noiseMap.height;
+            _cloudsOffset1 = ( _cloudsOffset1 + shiftAmount ) % _noiseMap.height;
 
             shiftAmount = Math.floor( _intensity * ( _cloudHeight / 2 ) );
-            cloudsOffset2 = ( cloudsOffset2 + shiftAmount ) % _noiseMap.height;
+            _cloudsOffset2 = ( _cloudsOffset2 + shiftAmount ) % _noiseMap.height;
 
-            drawToBitmapData( _cloudMap1, _maxColor, cloudsOffset1 );
-            drawToBitmapData( _cloudMap2, _maxColor, cloudsOffset2 );
+            drawToBitmapData( _cloudMap1, _maxColor, _cloudsOffset1 );
+            drawToBitmapData( _cloudMap2, _maxColor, _cloudsOffset2 );
         }
 
 

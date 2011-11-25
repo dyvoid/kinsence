@@ -11,7 +11,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         public var floorClipPlane:KinSenceVector;
         public var frameNumber:int;
         public var normalToGravity:KinSenceVector;
-        public var skeletonFrameQuality:uint;
+        public var quality:uint;
         public var skeletons:Vector.<SkeletonData>;
         public var timeStamp:uint;
 
@@ -36,7 +36,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
             normalToGravity = new KinSenceVector();
             normalToGravity.fromObject( object.NormalToGravity );
 
-            skeletonFrameQuality = uint( object.SkeletonFrameQuality );
+            quality = uint( object.Quality );
 
             skeletons = new Vector.<SkeletonData>();
             for each ( var skeletonObject:Object in object.Skeletons )

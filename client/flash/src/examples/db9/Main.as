@@ -499,14 +499,14 @@ package examples.db9
         {
             for each ( var skeletonData:SkeletonData in e.skeletonFrame.skeletons)
             {
-                if ( skeletonData.trackingState == SkeletonTrackingState.Tracked )
+                if ( skeletonData.trackingState == SkeletonTrackingState.TRACKED )
                 {
                     var joint:Joint;
                     var position:KinSenceVector;
 
                     joint = skeletonData.getJointByID( JointID.HEAD );
 
-                    if ( joint.trackingState != JointTrackingState.NotTracked )
+                    if ( joint.trackingState != JointTrackingState.NOT_TRACKED )
                     {
                         position = joint.position;
 

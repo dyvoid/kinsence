@@ -47,13 +47,13 @@ package nl.usmedia.kinsence.modules.skeletontracking
 			super( type, bubbles, cancelable );
 			
 			_skeletonFrame = skeletonFrame;
-		} 
+		}
 		
 		
 		public override function clone():Event 
 		{ 
 			return new SkeletonTrackingEvent( type, skeletonFrame, bubbles, cancelable );
-		} 
+		}
 		
 		
 		public override function toString():String 
