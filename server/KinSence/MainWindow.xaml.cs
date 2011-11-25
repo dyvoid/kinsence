@@ -30,6 +30,7 @@ using UsMedia.KinSence.Server;
 using System.Threading;
 using System.Windows.Threading;
 using System.Net;
+using UsMedia.KinSence.Server.Tcp;
 
 
 namespace UsMedia.KinSence
@@ -46,7 +47,8 @@ namespace UsMedia.KinSence
         Runtime nui;
         TcpServer server;
 
-        Dictionary<JointID,Brush> jointColors = new Dictionary<JointID, Brush>() { 
+        Dictionary<JointID,Brush> jointColors = new Dictionary<JointID, Brush>() 
+        { 
             {JointID.HipCenter, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
             {JointID.Spine, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
             {JointID.ShoulderCenter, new SolidColorBrush(Color.FromRgb(168, 230, 29))},
@@ -104,10 +106,9 @@ namespace UsMedia.KinSence
             depthY = depthY * 240; //convert to 320, 240 space
             int colorX, colorY;
             ImageViewArea iv = new ImageViewArea();
-            // only ImageResolution.Resolution640x480 is supported at this point
+            
             nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel( ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY );
 
-            // map back to skeleton.Width & skeleton.Height
             return new Point( (int)( skeleton.Width * colorX / 640.0 ), (int)( skeleton.Height * colorY / 480 ) );
         }
 
@@ -217,9 +218,9 @@ namespace UsMedia.KinSence
             Dispatcher.CurrentDispatcher.BeginInvoke( DispatcherPriority.Normal,
             new ThreadStart( delegate()
             {
-                indicatorRed.Visibility     = ( e.State == TcpServerState.Stopped )   ? Visibility.Visible : Visibility.Hidden;
-                indicatorOrange.Visibility  = ( e.State == TcpServerState.Waiting )   ? Visibility.Visible : Visibility.Hidden;
-                indicatorGreen.Visibility   = ( e.State == TcpServerState.Connected ) ? Visibility.Visible : Visibility.Hidden;
+                indicatorRed.Visibility     = ( e.State == ServerState.Stopped )   ? Visibility.Visible : Visibility.Hidden;
+                indicatorOrange.Visibility  = ( e.State == ServerState.Waiting )   ? Visibility.Visible : Visibility.Hidden;
+                indicatorGreen.Visibility   = ( e.State == ServerState.Connected ) ? Visibility.Visible : Visibility.Hidden;
             } ) );
         }
 

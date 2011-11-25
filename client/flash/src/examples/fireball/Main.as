@@ -82,6 +82,11 @@ package examples.fireball
         private var _cloudsOffset1:Number = 0;
         private var _cloudsOffset2:Number = 0;
 
+        [Embed("../../../assets/Flashbang-Kibblesbob-899170896.mp3")]
+        private var BoltCastSound:Class;
+
+        private var _boltCastSound:Sound;
+
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
@@ -167,6 +172,8 @@ package examples.fireball
 
             _fpsMeter = new FPSMeter();
             _fpsMeter.startMeasure(false);
+
+            _boltCastSound = new BoltCastSound() as Sound;
 
             this.addEventListener( Event.ENTER_FRAME, enterFrameHandler );
         }
@@ -260,8 +267,16 @@ package examples.fireball
             {
                 var handSet:Hands = e.handSets[ 0 ];
 
-                _intensityTarget = _bounds.getRelativePosFromValue( handSet.distanceRatio );
-                trace(handSet.distanceRatio);
+                if ( _intensity > 0.9 && handSet.left.ratioZ > 0.9 || handSet.right.ratioZ > 0.9 )
+                {
+                    _intensityTarget = 0;
+                    _intensity = 0;
+                    _boltCastSound.play();
+                }
+                else
+                {
+                    _intensityTarget = _bounds.getRelativePosFromValue( handSet.distanceRatio );
+                }
             }
         }
 
@@ -288,12 +303,13 @@ package examples.fireball
 
         private function drawToBitmapData( bitmapData:BitmapData, color:uint, offset:uint ):void
         {
-            var zeroPoint:Point = new Point();
+            var wrapAmount:Number = offset + _cloudHeight - _noiseMap.height;
 
-            var wrapAmount:Number = ( offset > _noiseMap.height - _cloudHeight ) ? offset + _cloudHeight - _noiseMap.height : 0;
+            if ( wrapAmount < 0 )
+                wrapAmount = 0;
 
             bitmapData.fillRect( bitmapData.rect, color );
-            bitmapData.copyChannel( _noiseMap, new Rectangle(0, offset, _cloudWidth, _cloudHeight - wrapAmount ), zeroPoint, BitmapDataChannel.BLUE, BitmapDataChannel.ALPHA );
+            bitmapData.copyChannel( _noiseMap, new Rectangle(0, offset, _cloudWidth, _cloudHeight - wrapAmount ), new Point(), BitmapDataChannel.BLUE, BitmapDataChannel.ALPHA );
 
             if ( wrapAmount != 0 )
             {
