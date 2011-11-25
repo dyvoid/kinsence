@@ -22,7 +22,7 @@
         </Canvas>
         <StackPanel Height="Auto" Margin="20" Width="Auto"  Orientation="Horizontal">
             <Canvas Width="14" Height="14">
-                <Ellipse Height="14" Name="indicatorRed" Stroke="Black" Width="14" OpacityMask="{x:Null}">
+                <Ellipse Height="14" Name="indicatorRed" Stroke="Black" Width="14">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop Color="Red" Offset="1" />
@@ -30,7 +30,7 @@
                         </RadialGradientBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Height="14" Name="indicatorOrange" OpacityMask="{x:Null}" Stroke="Black" Width="14" Visibility="Hidden">
+                <Ellipse Height="14" Name="indicatorOrange" Stroke="Black" Width="14">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop Color="Orange" Offset="1" />
@@ -38,7 +38,7 @@
                         </RadialGradientBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Height="14" Name="indicatorGreen" OpacityMask="{x:Null}" Stroke="Black" Width="14" Visibility="Hidden">
+                <Ellipse Height="14" Name="indicatorGreen" Stroke="Black" Width="14">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop Color="Green" Offset="1" />

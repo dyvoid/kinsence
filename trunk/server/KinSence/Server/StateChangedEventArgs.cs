@@ -7,6 +7,6 @@ namespace UsMedia.KinSence.Server
 {
     class StateChangedEventArgs : EventArgs
     {
-        public TcpServerState State { get; set; }
+        public ServerState State { get; set; }
     }
 }

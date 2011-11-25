@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Research.Kinect.Nui;
 using UsMedia.KinSence.Messages;
 using UsMedia.KinSence.Server;
-using UsMedia.KinSence.Interfaces;
+using UsMedia.KinSence.Modules;
 using Newtonsoft.Json;
 
 namespace UsMedia.KinSence.Modules

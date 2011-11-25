@@ -7,12 +7,12 @@ using UsMedia.KinSence.Server;
 using UsMedia.KinSence.Messages;
 using UsMedia.KinSence.Modules;
 using UsMedia.KinSence.Util;
-using UsMedia.KinSence.Interfaces;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Windows;
 using System.IO;
+using UsMedia.KinSence.Server.Tcp;
 
 namespace UsMedia.KinSence
 {
@@ -101,7 +101,7 @@ namespace UsMedia.KinSence
 
         public virtual void SendMessage( string target, string type, dynamic data )
         {
-            if ( server.State == TcpServerState.Connected )
+            if ( server.State == ServerState.Connected )
             {
                 Message message = new Message { Type = target + "." + type, Data = data };
                 server.SendMessage( message.ToJson() );
@@ -145,7 +145,7 @@ namespace UsMedia.KinSence
                 case "SetTransformSmoothParameters":
                     TransformSmoothParameters smoothParams = new TransformSmoothParameters();
 
-                    smoothParams.Correction = (float)data.Correction;
+                    smoothParams.Correction = (float) data.Correction;
                     smoothParams.JitterRadius = (float) data.JitterRadius;
                     smoothParams.MaxDeviationRadius = (float) data.MaxDeviationRadius;
                     smoothParams.Prediction = (float) data.Prediction;
@@ -167,7 +167,7 @@ namespace UsMedia.KinSence
             }
             catch (InvalidOperationException)
             {
-                System.Windows.MessageBox.Show("Kinect device was not found. Please make sure Kinect device is plugged in.");
+                System.Windows.MessageBox.Show("Kinect device was not found. Please make sure the device is plugged in.");
                 return;
             }
 

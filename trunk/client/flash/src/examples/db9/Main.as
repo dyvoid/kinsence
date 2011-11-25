@@ -21,6 +21,7 @@ package examples.db9
     import away3d.materials.methods.EnvMapAmbientMethod;
     import away3d.materials.methods.EnvMapDiffuseMethod;
     import away3d.materials.methods.FresnelEnvMapMethod;
+    import away3d.materials.methods.RimLightMethod;
     import away3d.materials.methods.SoftShadowMapMethod;
     import away3d.materials.utils.CubeMap;
     import away3d.primitives.PrimitiveBase;
@@ -31,6 +32,8 @@ package examples.db9
     import com.greensock.easing.Quint;
 
     import examples.db9.texttospeech.TextToSpeech;
+
+    import flash.events.IOErrorEvent;
 
     import nl.usmedia.kinsence.KinSence;
     import nl.usmedia.kinsence.transformsmooth.TransformSmoothParameters;
@@ -79,7 +82,7 @@ package examples.db9
         public static const NUM_CUBES   :uint = 400;
 
 //        public static const kinectlessMode :Boolean = true;
-        public static const kinectlessMode :Boolean = false;
+        private var _kinectlessMode :Boolean = false;
 
         private var _autoRotate:Boolean = false;
 
@@ -197,6 +200,7 @@ package examples.db9
         {
             _kinSence = new KinSence();
             _kinSence.addEventListener( Event.CONNECT, connectHandler );
+            _kinSence.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler );
 
             _skeletonTracking = new SkeletonTrackingModule();
             _skeletonTracking.addEventListener( SkeletonTrackingEvent.SKELETON_TRACKING_UPDATE, skeletonTrackingUpdateHandler );
@@ -211,22 +215,10 @@ package examples.db9
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
             _kinSence.registerModule( _handTracking );
 
-            if ( !kinectlessMode )
-            {
-//                _kinSence.connect( "127.0.0.1", 3000 );
-                _kinSence.connect( "192.168.1.7", 3000 );
-            }
+            _kinSence.connect( "127.0.0.1", 3000 );
+//              _kinSence.connect( "192.168.1.7", 3000 );
         }
 
-
-        private function connectHandler( event:Event ):void
-        {
-            _kinSence.setElevationAngle( 10 );
-            _kinSence.setTransformSmooth( true );
-            _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
-
-//            _tts.say( "connected to server" );
-        }
 
         private function initAway3D():void
         {
@@ -310,15 +302,6 @@ package examples.db9
             _carMat.shadowMethod = shadowMethod;
 //            _carMat.shadowMethod = new FilteredShadowMapMethod(skyLight);
 
-            var sphere:WireframeSphere = new WireframeSphere(1000,26,24,0x444444, 3);
-//            _view.scene.addChild(sphere);
-
-            /*for ( var i:int = 0; i < NUM_CUBES; i++ )
-            {
-                var orb:Orb = new Orb();
-                _view.scene.addChild( orb );
-            }*/
-
 
             _skyboxSide = Bitmap( new SkyboxSide() ).bitmapData;
             _skyboxTopBottom = Bitmap( new SkyboxTopBottom() ).bitmapData;
@@ -334,20 +317,9 @@ package examples.db9
             _mainObject.addEventListener(LoaderEvent.DATA_LOADED, onResourceDataLoaded);
             _mainObject.scale(100);
             _mainObject.rotationY = -90;
-//            var context:AssetLoaderContext = new AssetLoaderContext(true, "F:/Projects/Flash/Kinect/flash/assets/apache/maps");
-//            _mainObject.load( new URLRequest( "../assets/apache/apache.3ds" ), context );
             var context:AssetLoaderContext = new AssetLoaderContext(true, _localDir + "car");
             _mainObject.load( new URLRequest( _localDir + "car/db9.3ds" ), context );
             _view.scene.addChild(_mainObject);
-
-            var bloomFilter:BloomFilter3D = new BloomFilter3D( 25, 25, 0.01, 0.1 )
-            var dofFilter:DepthOfFieldFilter3D = new DepthOfFieldFilter3D(5, 5);
-//            dofFilter.focusDistance = 500;
-            dofFilter.range = 300;
-            dofFilter.focusTarget = _mainObject;
-            var motionBlurFilter:MotionBlurFilter3D = new MotionBlurFilter3D(0.6);
-            var radialBlurFilter:RadialBlurFilter3D = new RadialBlurFilter3D( 0.25, 1 )
-//            _view.filters3d = [ dofFilter ];
 
             _view.camera.lookAt( _mainObject.position );
             _view.camera.y = 200;
@@ -381,20 +353,12 @@ package examples.db9
             for ( var j:int = 0; j < objectContainer3D.numChildren; ++j )
             {
                 mesh = Mesh( objectContainer3D.getChildAt( j ) );
-//                mesh.geometry.subGeometries[0].autoDeriveVertexNormals = true;
-//                mesh.material = _carMat;
-
-                var reflectMap:BitmapData = new ChromeBlurred();
 
                 var material:DefaultMaterialBase = mesh.material as DefaultMaterialBase;
 
                 if ( mesh.name != "Floor" )
                 {
                     material.lights = [_light1, _light2, _light3, skyLight ];
-//                  material.glossMap = reflectMap;
-//                  material.gloss = 200;
-//                    material.specular = 1;
-//                    material.specularMap = reflectMap;
                     material.bothSides = false;
                     material.shadowMethod = new SoftShadowMapMethod( skyLight );
                 }
@@ -415,15 +379,6 @@ package examples.db9
             _bodyMat.gloss = 130;
             _bodyMat.specular = 1;
             _bodyMat.lights = [_light1, _light2, _light3, skyLight];
-//            _bodyMat.lights = null;
-
-            var envMapAmbientMethod:EnvMapAmbientMethod = new EnvMapAmbientMethod( _skyBoxCubeMap );
-//            _bodyMat.ambientMethod = envMapAmbientMethod;
-
-            var envMapDiffuseMethod:EnvMapDiffuseMethod = new EnvMapDiffuseMethod( _skyBoxCubeMap );
-//            _bodyMat.diffuseMethod = envMapDiffuseMethod;
-
-//            _bodyMat.addMethod( new RimLightMethod(0xffffff, 1, 6, RimLightMethod.ADD ) );
             
             applyFresnel( "BodyColor", 1.5 );
             applyFresnel( "Windows" );
@@ -441,29 +396,6 @@ package examples.db9
              mat.addMethod( fresnelEnvMapMethod );
         }
 
-
-        private function onEnterFrame( e:Event ):void
-        {
-            if ( kinectlessMode || _autoRotate )
-            {
-//                _mainObject.rotationX += 1.15;
-                _mainObject.rotationY += 1.15;
-//              _mainObject.rotationZ += 1.15;
-            }
-
-//            _light1.x -= 1;
-//            _light2.x += 1;
-
-//            _view.camera.z += 1;
-//            _view.camera.y += 1;
-            _view.camera.lookAt( new Vector3D(0,0,0) );
-
-//            _kinSence.fakeIt( TestData.next() );
-
-            _view.render();
-        }
-
-
         // ____________________________________________________________________________________________________
         // PROTECTED
 
@@ -474,6 +406,38 @@ package examples.db9
 
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS
+
+        private function connectHandler( event:Event ):void
+        {
+            _kinSence.setElevationAngle( 10 );
+            _kinSence.setTransformSmooth( true );
+            _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
+
+            _tts.say( "connected to server" );
+        }
+
+
+        private function ioErrorHandler( e:IOErrorEvent ):void
+        {
+            _kinectlessMode = true;
+            _autoRotate = true;
+        }
+
+
+        private function onEnterFrame( e:Event ):void
+        {
+            if ( _kinectlessMode || _autoRotate )
+            {
+//                _mainObject.rotationX += 1.15;
+                _mainObject.rotationY += 1.15;
+//              _mainObject.rotationZ += 1.15;
+            }
+            
+            _view.camera.lookAt( new Vector3D() );
+
+            _view.render();
+        }
+        
 
         private function speechRecognitionModuleRegisteredEvent( e:KinSenceModuleEvent ):void
         {
