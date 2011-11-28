@@ -45,33 +45,7 @@ namespace UsMedia.KinSence.Modules.HandTracking
         // ____________________________________________________________________________________________________
         // PRIVATE
 
-        private HandData CreateHandData( Joint shoulderJoint, Joint elbowJoint, Joint handJoint )
-        {
-            HandData handData = new HandData();
-
-            if ( shoulderJoint.TrackingState != JointTrackingState.NotTracked &&
-                 elbowJoint.TrackingState != JointTrackingState.NotTracked &&
-                 handJoint.TrackingState != JointTrackingState.NotTracked )
-            {
-                armLength = 0;
-                armLength += Math.Abs( CalcVectorDistance( shoulderJoint.Position, elbowJoint.Position ) );
-                armLength += Math.Abs( CalcVectorDistance( elbowJoint.Position, handJoint.Position ) );
-            }
-
-            Range xRange = new Range( 0.8 * -armLength, armLength );
-            Range yRange = new Range( armLength, -armLength );
-            Range zRange = new Range( 0.1, armLength );
-
-            double dx = handJoint.Position.X - shoulderJoint.Position.X;
-            double dy = handJoint.Position.Y - shoulderJoint.Position.Y;
-            double dz = shoulderJoint.Position.Z - handJoint.Position.Z;
-
-            handData.RatioX = xRange.GetRelativePosFromValue( dx );
-            handData.RatioY = yRange.GetRelativePosFromValue( dy );
-            handData.RatioZ = zRange.GetRelativePosFromValue( dz );
-
-            return handData;
-        }
+        
 
         // ____________________________________________________________________________________________________
         // PROTECTED
@@ -98,9 +72,9 @@ namespace UsMedia.KinSence.Modules.HandTracking
                         data.Joints[ JointID.HandRight ] );
                     hands.Right.TrackingState = data.Joints[ JointID.HandRight ].TrackingState;
 
-                    double maxDistance = armLength * 2 + CalcVectorDistance(data.Joints[JointID.ShoulderLeft].Position, data.Joints[JointID.ShoulderRight].Position);
-                    double distance = CalcVectorDistance(data.Joints[JointID.HandLeft].Position, data.Joints[JointID.HandRight].Position);
-                    hands.DistanceRatio = distance / maxDistance;
+                    double maxHandsDistance = armLength * 2 + CalcVectorDistance(data.Joints[JointID.ShoulderLeft].Position, data.Joints[JointID.ShoulderRight].Position);
+                    double handsDistance = CalcVectorDistance(data.Joints[JointID.HandLeft].Position, data.Joints[JointID.HandRight].Position);
+                    hands.DistanceRatio = handsDistance / maxHandsDistance;
                     if (hands.DistanceRatio > 1)
                         hands.DistanceRatio = 1;
 
@@ -112,6 +86,35 @@ namespace UsMedia.KinSence.Modules.HandTracking
             {
                 SendMessage( "HandTrackingUpdate", handsCollection );
             }
+        }
+
+
+        protected HandData CreateHandData( Joint shoulderJoint, Joint elbowJoint, Joint handJoint )
+        {
+            HandData handData = new HandData();
+
+            if ( shoulderJoint.TrackingState != JointTrackingState.NotTracked &&
+                 elbowJoint.TrackingState != JointTrackingState.NotTracked &&
+                 handJoint.TrackingState != JointTrackingState.NotTracked )
+            {
+                armLength = 0;
+                armLength += Math.Abs( CalcVectorDistance( shoulderJoint.Position, elbowJoint.Position ) );
+                armLength += Math.Abs( CalcVectorDistance( elbowJoint.Position, handJoint.Position ) );
+            }
+
+            Range xRange = new Range( 0.8 * -armLength, armLength );
+            Range yRange = new Range( armLength, -armLength );
+            Range zRange = new Range( 0.1, armLength );
+
+            double dx = handJoint.Position.X - shoulderJoint.Position.X;
+            double dy = handJoint.Position.Y - shoulderJoint.Position.Y;
+            double dz = shoulderJoint.Position.Z - handJoint.Position.Z;
+
+            handData.RatioX = xRange.GetRelativePosFromValue( dx );
+            handData.RatioY = yRange.GetRelativePosFromValue( dy );
+            handData.RatioZ = zRange.GetRelativePosFromValue( dz );
+
+            return handData;
         }
 
 

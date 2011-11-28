@@ -33,7 +33,10 @@ package examples.db9
 
     import examples.db9.texttospeech.TextToSpeech;
 
+    import flash.events.ErrorEvent;
+
     import flash.events.IOErrorEvent;
+    import flash.events.SecurityErrorEvent;
 
     import nl.usmedia.kinsence.KinSence;
     import nl.usmedia.kinsence.transformsmooth.TransformSmoothParameters;
@@ -79,11 +82,6 @@ package examples.db9
         // ____________________________________________________________________________________________________
         // PROPERTIES
 
-        public static const NUM_CUBES   :uint = 400;
-
-//        public static const kinectlessMode :Boolean = true;
-        private var _kinectlessMode :Boolean = false;
-
         private var _autoRotate:Boolean = false;
 
         private var _kinSence:KinSence;
@@ -96,8 +94,8 @@ package examples.db9
         private var _yRangeKinect:Range = new Range( 2.2, -2.2 );
         private var _zRangeKinect:Range = new Range( 4, 0 );
 
-        private var _xRangeStage:Range = new Range( 0, 900 );
-        private var _yRangeStage:Range = new Range( 0, 680 );
+        private var _xRangeStage:Range = new Range( 0, 1000 );
+        private var _yRangeStage:Range = new Range( 0, 600 );
         private var _zRangeStage:Range = new Range( 0, 2 );
 
         private var _xRangeCamera:Range = new Range( -1500, 1500 );
@@ -114,11 +112,8 @@ package examples.db9
         private var _light2:PointLight;
         private var _light3:PointLight;
 
-        private var cube:PrimitiveBase;
-        private var _carMat:ColorMaterial;
-
         private var _tts:TextToSpeech = new TextToSpeech();
-        private var skyLight:DirectionalLight;
+        private var _skyLight:DirectionalLight;
 
         private var _localDir:String;
 
@@ -152,7 +147,7 @@ package examples.db9
 
             _localDir = parts.join("/") + "/";
 
-            initKinectClient();
+            initKinSence();
             initAway3D();
             initObjects();
 
@@ -196,11 +191,12 @@ package examples.db9
         // ____________________________________________________________________________________________________
         // PRIVATE
 
-        private function initKinectClient():void
+        private function initKinSence():void
         {
             _kinSence = new KinSence();
-            _kinSence.addEventListener( Event.CONNECT, connectHandler );
-            _kinSence.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler );
+            _kinSence.addEventListener( Event.CONNECT, connectSuccessHandler );
+            _kinSence.addEventListener( IOErrorEvent.IO_ERROR, connectErrorHandler );
+            _kinSence.addEventListener( SecurityErrorEvent.SECURITY_ERROR, connectErrorHandler );
 
             _skeletonTracking = new SkeletonTrackingModule();
             _skeletonTracking.addEventListener( SkeletonTrackingEvent.SKELETON_TRACKING_UPDATE, skeletonTrackingUpdateHandler );
@@ -215,8 +211,8 @@ package examples.db9
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
             _kinSence.registerModule( _handTracking );
 
-            _kinSence.connect( "127.0.0.1", 3000 );
-//              _kinSence.connect( "192.168.1.7", 3000 );
+//            _kinSence.connect( "127.0.0.1", 3000 );
+              _kinSence.connect( "192.168.1.7", 3000 );
         }
 
 
@@ -225,7 +221,7 @@ package examples.db9
             // Setup the view
 			_view = new View3D();
             _view.backgroundColor = 0xdddddd;
-			_view.antiAlias = 16;
+			_view.antiAlias = 4;
 			addChild(_view);
 
             _view.camera.z = -750;
@@ -257,14 +253,14 @@ package examples.db9
 			_light3.fallOff = 1800;
 			_view.scene.addChild(_light3);
 
-            skyLight = new DirectionalLight();
-            skyLight.color = 0xffffff;
-            skyLight.y = 500;
-            skyLight.specular = 1.2;
-            skyLight.diffuse = .8;
-            skyLight.castsShadows = true;
-            skyLight.lookAt(new Vector3D(0,0,0));
-            _view.scene.addChild(skyLight);
+            _skyLight = new DirectionalLight();
+            _skyLight.color = 0xffffff;
+            _skyLight.y = 500;
+            _skyLight.specular = 1.2;
+            _skyLight.diffuse = .8;
+            _skyLight.castsShadows = true;
+            _skyLight.lookAt(new Vector3D());
+            _view.scene.addChild(_skyLight);
         }
 
 
@@ -287,21 +283,7 @@ package examples.db9
         {
             var reflectMap:BitmapData = new ChromeBlurred();
 
-            var shadowMethod:SoftShadowMapMethod = new SoftShadowMapMethod( skyLight );
-
-			// Create primitives material
-            _carMat = new ColorMaterial( 0x999999, 1 ); // medium gray
-            _carMat.glossMap = reflectMap;
-//            _carMat.gloss = 0.001;
-            _carMat.ambientColor = 0xffffff;
-//            _carMat.ambient = 0.4;
-            _carMat.specularMap = reflectMap;
-			_carMat.lights = [_light1, _light2, _light3, skyLight]; // setup the material to use lights
-//			_carMat.lights = [ _light2, skyLight]; // setup the material to use lights
-            _carMat.bothSides = false;
-            _carMat.shadowMethod = shadowMethod;
-//            _carMat.shadowMethod = new FilteredShadowMapMethod(skyLight);
-
+            var shadowMethod:SoftShadowMapMethod = new SoftShadowMapMethod( _skyLight );
 
             _skyboxSide = Bitmap( new SkyboxSide() ).bitmapData;
             _skyboxTopBottom = Bitmap( new SkyboxTopBottom() ).bitmapData;
@@ -324,7 +306,7 @@ package examples.db9
             _view.camera.lookAt( _mainObject.position );
             _view.camera.y = 200;
 
-            addEventListener( Event.ENTER_FRAME, onEnterFrame );
+            addEventListener( Event.ENTER_FRAME, enterFrameHandler );
         }
 
 
@@ -358,9 +340,9 @@ package examples.db9
 
                 if ( mesh.name != "Floor" )
                 {
-                    material.lights = [_light1, _light2, _light3, skyLight ];
+                    material.lights = [_light1, _light2, _light3, _skyLight ];
                     material.bothSides = false;
-                    material.shadowMethod = new SoftShadowMapMethod( skyLight );
+                    material.shadowMethod = new SoftShadowMapMethod( _skyLight );
                 }
                 else
                 {
@@ -376,9 +358,6 @@ package examples.db9
             blackMat.gloss = 255;
 
             _bodyMat = MaterialLibrary.getInstance().getMaterial( "BodyColor" ) as ColorMaterial;
-            _bodyMat.gloss = 130;
-            _bodyMat.specular = 1;
-            _bodyMat.lights = [_light1, _light2, _light3, skyLight];
             
             applyFresnel( "BodyColor", 1.5 );
             applyFresnel( "Windows" );
@@ -407,7 +386,7 @@ package examples.db9
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS
 
-        private function connectHandler( event:Event ):void
+        private function connectSuccessHandler( event:Event ):void
         {
             _kinSence.setElevationAngle( 10 );
             _kinSence.setTransformSmooth( true );
@@ -417,20 +396,17 @@ package examples.db9
         }
 
 
-        private function ioErrorHandler( e:IOErrorEvent ):void
+        private function connectErrorHandler( e:ErrorEvent ):void
         {
-            _kinectlessMode = true;
             _autoRotate = true;
         }
 
 
-        private function onEnterFrame( e:Event ):void
+        private function enterFrameHandler( e:Event ):void
         {
-            if ( _kinectlessMode || _autoRotate )
+            if ( _autoRotate )
             {
-//                _mainObject.rotationX += 1.15;
                 _mainObject.rotationY += 1.15;
-//              _mainObject.rotationZ += 1.15;
             }
             
             _view.camera.lookAt( new Vector3D() );
@@ -450,9 +426,7 @@ package examples.db9
                 "color yellow",
                 "color orange",
                 "color pink",
-                "color brown",
-                "start auto rotate",
-                "stop auto rotate"
+                "color brown"
             ];
 
             _speechRecognition.configure( phrases, "start listening", "stop listening" );
@@ -534,16 +508,6 @@ package examples.db9
                         color = 0x94540F;
                     break;
 
-                    case "start auto rotate":
-                        _tts.say( "auto rotate activated" );
-                        _autoRotate = true;
-                        return;
-
-                    case "stop auto rotate":
-                        _tts.say( "auto rotate deactivated" );
-                        _autoRotate = false;
-                        return;
-
                     case "start listening":
                         _tts.say( "voice control activated" );
                         return;
@@ -574,18 +538,17 @@ package examples.db9
 
                 _leftHandTracker.x = leftHand.ratioX * stage.stageWidth;
                 _leftHandTracker.y = leftHand.ratioY * stage.stageHeight;
+                _leftHandTracker.scaleX =
+                _leftHandTracker.scaleY = leftHand.ratioZ;
 
                 _rightHandTracker.x = rightHand.ratioX * stage.stageWidth;
                 _rightHandTracker.y = rightHand.ratioY * stage.stageHeight;
-
-//                _rightHandTracker.scaleX =
-//                _rightHandTracker.scaleY = rightHand.ratioZ;
+                _rightHandTracker.scaleX =
+                _rightHandTracker.scaleY = rightHand.ratioZ;
 
                 if ( rightHand.ratioY < 0.7 && rightHand.ratioZ > 0.5 )
                 {
                     _mainObject.rotationY = rightHand.ratioX * 360;
-//                    _mainObject.rotationX = rightHand.ratioY * 360;
-//                cube.rotationY = Math.PI * rightHand.ratioY;
                 }
 
                 if ( leftHand.ratioY < 0.7 && leftHand.ratioZ > 0.5 )
@@ -594,7 +557,6 @@ package examples.db9
 
                     updateLighting( brightness );*/
                 }
-
             }
         }
 

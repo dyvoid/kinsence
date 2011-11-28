@@ -11,10 +11,10 @@ package nl.usmedia.kinsence.modules
      * @author Pieter van de Sluis
      */
 
-    [Event(name="KinectModuleEvent::REGISTERED", type="nl.usmedia.kinsence.modules.events.KinSenceModuleEvent")]
-    [Event(name="KinectModuleEvent::REMOVED", type="nl.usmedia.kinsence.modules.events.KinSenceModuleEvent")]
+    [Event(name="KinSenceModuleEvent::REGISTERED", type="nl.usmedia.kinsence.modules.events.KinSenceModuleEvent")]
+    [Event(name="KinSenceModuleEvent::REMOVED", type="nl.usmedia.kinsence.modules.events.KinSenceModuleEvent")]
 
-    public class AbstractKinectModule extends EventDispatcher implements IKinSenceModule
+    public class AbstractKinSenceModule extends EventDispatcher implements IKinSenceModule
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES
@@ -25,7 +25,7 @@ package nl.usmedia.kinsence.modules
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
-        public function AbstractKinectModule( name:String )
+        public function AbstractKinSenceModule( name:String )
         {
             _name = name;
         }

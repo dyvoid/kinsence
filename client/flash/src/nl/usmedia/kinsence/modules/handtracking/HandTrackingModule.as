@@ -2,7 +2,7 @@ package nl.usmedia.kinsence.modules.handtracking
 {
     import nl.usmedia.kinsence.modules.handtracking.HandTrackingEvent;
 
-    import nl.usmedia.kinsence.modules.AbstractKinectModule;
+    import nl.usmedia.kinsence.modules.AbstractKinSenceModule;
     import nl.usmedia.kinsence.modules.handtracking.hands.Hands;
     import nl.usmedia.kinsence.modules.skeletontracking.skeleton.KinSenceVector;
 
@@ -13,7 +13,7 @@ package nl.usmedia.kinsence.modules.handtracking
 
     [Event(name="HandTrackingEvent::HAND_TRACKING_UPDATE", type="nl.usmedia.kinsence.modules.handtracking.HandTrackingEvent")]
 
-    public class HandTrackingModule extends AbstractKinectModule
+    public class HandTrackingModule extends AbstractKinSenceModule
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES

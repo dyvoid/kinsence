@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="flex" name="DB9 Debug">
       <configuration flex_sdk="Flex SDK 4.5.1.21328 AIR AIR Mobile">
-        <option name="DO_BUILD" value="false" />
+        <option name="DO_BUILD" value="true" />
         <option name="OUTPUT_TYPE" value="Application" />
         <option name="USE_DEFAULT_SDK_CONFIG_FILE" value="true" />
         <option name="USE_CUSTOM_CONFIG_FILE" value="false" />

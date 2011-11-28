@@ -125,8 +125,8 @@ package examples.fireball
             _kinSence = new KinSence();
             _kinSence.addEventListener( Event.CONNECT, connectHandler );
             _kinSence.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler );
-            _kinSence.connect( "127.0.0.1", 3000 );
-//            _kinSence.connect( "192.168.1.7", 3000 );
+//            _kinSence.connect( "127.0.0.1", 3000 );
+            _kinSence.connect( "192.168.1.7", 3000 );
 
             _handTracking = new HandTrackingModule();
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
@@ -267,11 +267,15 @@ package examples.fireball
             {
                 var handSet:Hands = e.handSets[ 0 ];
 
-                if ( _intensity > 0.9 && handSet.left.ratioZ > 0.9 || handSet.right.ratioZ > 0.9 )
+                if ( handSet.left.ratioZ > 0.8 || handSet.right.ratioZ > 0.8 )
                 {
                     _intensityTarget = 0;
-                    _intensity = 0;
-                    _boltCastSound.play();
+
+                    if ( _intensity > 0.9 )
+                    {
+                        _intensity = 0;
+                        _boltCastSound.play();
+                    }
                 }
                 else
                 {
@@ -283,9 +287,11 @@ package examples.fireball
 
         private function enterFrameHandler( e:Event ):void
         {
+            trace(_intensity);
+
             fpsText.text = _fpsMeter.fps.toString();
             
-            _intensity += ( _intensityTarget - _intensity ) / 20;
+            _intensity += ( _intensityTarget - _intensity ) / 60;
 
             _clouds1.alpha = _intensity;
             _clouds2.alpha = _intensity;

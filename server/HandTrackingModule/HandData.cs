@@ -6,7 +6,7 @@ using Microsoft.Research.Kinect.Nui;
 
 namespace UsMedia.KinSence.Modules.HandTracking
 {
-    class HandData
+    public class HandData
     {
         public JointTrackingState TrackingState;
 

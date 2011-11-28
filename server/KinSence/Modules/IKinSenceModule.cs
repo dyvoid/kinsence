@@ -12,7 +12,7 @@ namespace UsMedia.KinSence.Modules
 
         IKinSenceCore Core { get; set; }
 
-        String Name { get; }
+        string Name { get; }
 
     }
 }
