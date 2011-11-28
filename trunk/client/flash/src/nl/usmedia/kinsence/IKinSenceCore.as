@@ -24,8 +24,12 @@
  * http://www.usmedia.nl
  */
 
-package nl.usmedia.kinsence.interfaces
+package nl.usmedia.kinsence
 {
+    import nl.usmedia.kinsence.interfaces.*;
+    import nl.usmedia.kinsence.modules.IKinSenceModule;
+
+
     /**
      * @author Pieter van de Sluis
      */
