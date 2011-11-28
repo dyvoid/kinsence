@@ -4,7 +4,7 @@
   <description asmv2:iconFile="kinsence.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="KinSence" version="0.8.4349.31254" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="KinSence" version="0.8.4349.32855" language="neutral" processorArchitecture="x86" />
     <commandLine file="KinSence.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -54,13 +54,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KinSence.exe" size="98304">
-      <assemblyIdentity name="KinSence" version="0.8.4349.31254" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="KinSence" version="0.8.4349.32855" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>7cimZctGJ/DXVIAAuOBRK9AW8oo=</dsig:DigestValue>
+        <dsig:DigestValue>MQeP6yWwcC1Z9VYjxXED8ZvUew4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

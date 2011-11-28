@@ -78,11 +78,11 @@ namespace UsMedia.KinSence.Server.Tcp
                 tcpListener.Stop();
             }
 
+            SetState( ServerState.Waiting );
+
             tcpListener = new TcpListener(ipAddress, port);
             listenThread = new Thread( new ThreadStart( ListenForClients ) );
-            listenThread.Start();
-
-            SetState( ServerState.Waiting );
+            listenThread.Start();            
 
             System.Diagnostics.Debug.WriteLine( "Server started" );
         }
@@ -113,7 +113,7 @@ namespace UsMedia.KinSence.Server.Tcp
                     clientStream.Write( buffer, 0, buffer.Length );
                     clientStream.Flush();
                 }
-                catch ( Exception )
+                catch
                 {
                     System.Diagnostics.Debug.WriteLine( "Message send attempt failed" );
                 }
@@ -125,7 +125,17 @@ namespace UsMedia.KinSence.Server.Tcp
 
         private void ListenForClients()
         {
-            tcpListener.Start();
+            try
+            {
+                tcpListener.Start();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show( "Unable to set up server on this IP address" );
+                Stop();
+                return;
+            }
+            
 
             while ( true )
             {
