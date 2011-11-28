@@ -37,7 +37,7 @@
       <HintPath>C:\Program Files (x86)\Microsoft Speech Platform SDK\Assembly\Microsoft.Speech.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\KinectServer\lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\KinSence\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

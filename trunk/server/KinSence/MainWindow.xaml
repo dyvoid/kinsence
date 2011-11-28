@@ -15,6 +15,7 @@
     <StackPanel Orientation="Vertical">
         <Canvas Height="48">
             <Image Width="124" Height="50" Source="/KinSence;component/logo.png" Canvas.Left="20" Canvas.Top="8" />
+            <Label Canvas.Right="20" Canvas.Top="17" Name="tfVersion" HorizontalContentAlignment="Right" Foreground="DarkGray" Content="version" Padding="0" />
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0" />
@@ -50,13 +51,13 @@
                 </Ellipse>
             </Canvas>
             <Label Content="IP Address" Height="28" Foreground="Black" />
-            <TextBox Height="23" Name="inIPAddress" Width="120" Text="192.168.1.7" MaxLength="15" AutoWordSelection="True" />
+            <TextBox Height="23" Name="inIPAddress" Width="96" Text="192.128.1.7" MaxLength="15" />
             <Label Content="Port" Height="28" Foreground="Black" />
-            <TextBox Height="23" Name="inPort" Text="3000" Width="38" MaxLength="4" />
+            <TextBox Height="23" Name="inPort" Text="3000" Width="47" MaxLength="5" />
             <Button Content="Start" Height="23" Name="startButton" Width="75" Margin="10 0 0 0" Click="startButton_Click" />
             <Button Content="Stop" Height="23" Name="stopButton" Width="75" Margin="10 0 0 0" Click="stopButton_Click" IsEnabled="False" />
         </StackPanel>
-        <Separator Background="#FF555555" Height="1" />
+        <Separator Height="1" Background="#FFC8D0D7" />
         <StackPanel Orientation="Vertical" Margin="20">
             <CheckBox Content="Show video streams" Height="16" Name="videoStreamsToggle" Foreground="Black" Margin="0 0 0 10" Unchecked="videoStreamsToggle_Unchecked" Checked="videoStreamsToggle_Checked" />
             <StackPanel Orientation="Horizontal">

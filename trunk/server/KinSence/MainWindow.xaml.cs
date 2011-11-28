@@ -4,7 +4,7 @@
 // All rights reserved. 
 // http://www.usmedia.nl
 //
-// Portions of this code are adapted from the Skeletal Viewer sample 
+// Portions of this code are taken from the Skeletal Viewer sample 
 // application that is part of the official Kinect SDK. 
 //
 // This code is licensed under the terms of the 
@@ -12,6 +12,7 @@
 // License Agreement: http://research.microsoft.com/KinectSDK-ToU
 //
 /////////////////////////////////////////////////////////////////////////
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,7 @@ using UsMedia.KinSence.Server.Tcp;
 
 namespace UsMedia.KinSence
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         // ____________________________________________________________________________________________________
@@ -98,6 +97,8 @@ namespace UsMedia.KinSence
 
             server = kinectCore.Server;
             server.StateChanged += new EventHandler<StateChangedEventArgs>( server_StateChanged );
+
+            tfVersion.Content = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
 
@@ -228,7 +229,33 @@ namespace UsMedia.KinSence
 
         private void startButton_Click( object sender, RoutedEventArgs e )
         {
-            server.Start( IPAddress.Parse( inIPAddress.Text ), Convert.ToInt16( inPort.Text ) );
+            IPAddress ipAddress;
+            int port;
+
+            try
+            {
+                ipAddress = IPAddress.Parse( inIPAddress.Text );
+            }
+            catch ( Exception )
+            {
+                MessageBox.Show( "IP Address is invalid" );
+                return;
+            }
+
+            try
+            {
+                port = Convert.ToInt16( inPort.Text );
+
+                if ( port > 65535 )
+                    throw new Exception();
+            }
+            catch ( Exception )
+            {
+                MessageBox.Show( "Port is invalid" );
+                return;
+            }
+
+            server.Start( ipAddress, port );
 
             stopButton.IsEnabled = true;
             startButton.IsEnabled =

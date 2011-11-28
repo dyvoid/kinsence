@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Research.Kinect, Version=1.0.0.45, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\KinectServer\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\KinSence\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
