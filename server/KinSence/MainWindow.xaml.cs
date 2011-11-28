@@ -1,9 +1,12 @@
 /////////////////////////////////////////////////////////////////////////
 //
-// This module contains code to do Kinect NUI initialization and
-// processing and also to display NUI streams on screen.
+// Copyright (c) 2012, Pieter van de Sluis, Us Media
+// All rights reserved. 
+// http://www.usmedia.nl
 //
-// Copyright © Microsoft Corporation.  All rights reserved.  
+// Portions of this code are adapted from the Skeletal Viewer sample 
+// application that is part of the official Kinect SDK. 
+//
 // This code is licensed under the terms of the 
 // Microsoft Kinect for Windows SDK (Beta) from Microsoft Research 
 // License Agreement: http://research.microsoft.com/KinectSDK-ToU

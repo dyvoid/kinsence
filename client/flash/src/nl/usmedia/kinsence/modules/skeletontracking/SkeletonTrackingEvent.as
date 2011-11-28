@@ -1,7 +1,7 @@
 /*
  * Licensed under the MIT license
  *
- * Copyright (c) 2009-2011 Pieter van de Sluis
+ * Copyright (c) 2012 Pieter van de Sluis, Us Media
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * http://code.google.com/p/imotionproductions/
+ * http://www.usmedia.nl
  */
 
 package nl.usmedia.kinsence.modules.skeletontracking
