@@ -20,7 +20,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany( "Us Media" )]
 [assembly: AssemblyProduct("KinSence")]
-[assembly: AssemblyCopyright( "Copyright © Us Media 2011" )]
+[assembly: AssemblyCopyright( "Copyright © Us Media 2012" )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

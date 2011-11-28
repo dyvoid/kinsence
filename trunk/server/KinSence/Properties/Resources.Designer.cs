@@ -59,5 +59,22 @@ namespace UsMedia.KinSence.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License Terms 
+        ///
+        ///Copyright (c) 2012, Pieter van de Sluis, Us Media
+        ///All rights reserved. 
+        ///http://www.usmedia.nl
+        ///
+        ///This document (“End User License Agreement” or “EULA”) is a contract between you and the person who (or company that) provided you this software (“Software Provider”). The EULA defines your rights and responsibilities related to the software. 
+        ///
+        ///By downloading, installing, accessing, or using the software, you accept all terms in this EULA. If you do not accept them, you have no right to dow [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
     }
 }
