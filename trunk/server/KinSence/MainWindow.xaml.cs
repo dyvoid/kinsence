@@ -210,7 +210,6 @@ namespace UsMedia.KinSence
 
         private void nui_ColorFrameReady( object sender, ImageFrameReadyEventArgs e )
         {
-            // 32-bit per pixel, RGBA image
             PlanarImage Image = e.ImageFrame.Image;
             video.Source = BitmapSource.Create( Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel );
         }

@@ -6,12 +6,6 @@
     <Window.Background>
         <ImageBrush ImageSource="/KinSence;component/background.png" Stretch="None" TileMode="FlipX" Viewport="0,0,876,551" ViewportUnits="Absolute" />
     </Window.Background>
-    <!--Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="White" Offset="0" />
-            <GradientStop Color="#b6c3d1" Offset="1" />
-        </LinearGradientBrush>
-    </Window.Background-->
     <StackPanel Orientation="Vertical">
         <Canvas Height="48">
             <Image Width="124" Height="50" Source="/KinSence;component/logo.png" Canvas.Left="20" Canvas.Top="8" />
