@@ -96,11 +96,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Interfaces\IClientMessageHandler.cs" />
-    <Compile Include="Interfaces\IKinSenceCore.cs" />
-    <Compile Include="Interfaces\IKinSenceModule.cs" />
+    <Compile Include="IClientMessageHandler.cs" />
+    <Compile Include="IKinSenceCore.cs" />
     <Compile Include="KinSenceCore.cs" />
     <Compile Include="Modules\AbstractKinSenceModule.cs" />
+    <Compile Include="Modules\IKinSenceModule.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,10 +112,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Server\DataReceivedEventArgs.cs" />
+    <Compile Include="Server\IKinSenceServer.cs" />
+    <Compile Include="Server\ServerState.cs" />
+    <Compile Include="Server\Tcp\TcpServer.cs" />
     <Compile Include="Util\Range.cs" />
-    <Compile Include="Server\TcpServer.cs" />
     <Compile Include="Messages\Message.cs" />
-    <Compile Include="Server\TcpServerState.cs" />
     <Compile Include="Server\StateChangedEventArgs.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +172,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="background.png" />
     <Resource Include="logo.png" />

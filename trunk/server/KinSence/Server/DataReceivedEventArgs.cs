@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UsMedia.KinSence.Messages
+namespace UsMedia.KinSence.Server
 {
     class DataReceivedEventArgs : EventArgs
     {

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="9c880b57-cebc-4106-976c-7b2f84c0922d" name="Default" comment="" />
+    <list default="true" readonly="true" id="9c880b57-cebc-4106-976c-7b2f84c0922d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bin/Fireball.apk" afterPath="$PROJECT_DIR$/../bin/Fireball.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bin/db9_debug.swf" afterPath="$PROJECT_DIR$/../bin/db9_debug.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bin/fireball.swf" afterPath="$PROJECT_DIR$/../bin/fireball.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KinSence.iml" afterPath="$PROJECT_DIR$/KinSence.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KinSence.ipr" afterPath="$PROJECT_DIR$/KinSence.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KinSence.iws" afterPath="$PROJECT_DIR$/KinSence.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/examples/db9/Main.as" afterPath="$PROJECT_DIR$/../src/examples/db9/Main.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/examples/fireball/Main.as" afterPath="$PROJECT_DIR$/../src/examples/fireball/Main.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/HandTrackingModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/HandTrackingModule.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/SkeletonTrackingModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/SkeletonTrackingModule.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/speechrecognition/SpeechRecognitionModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/speechrecognition/SpeechRecognitionModule.as" />
+      <change type="MOVED" beforePath="F:\Projects\KinSence\sources\client\flash\src\nl\usmedia\kinsence\modules\AbstractKinectModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/AbstractKinSenceModule.as" />
+    </list>
     <ignored path="KinSence.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -66,8 +80,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -76,19 +90,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.as" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../src/examples/fireball/Main.as">
+      <file leaf-file-name="KinSence.as" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="0" selection-start="4743" selection-end="4743" vertical-scroll-proportion="0.4187192">
+            <state line="20" column="7" selection-start="593" selection-end="593" vertical-scroll-proportion="0.10181818">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hands.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/hands/Hands.as">
+      <file leaf-file-name="Main.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/examples/db9/Main.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="63" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0">
+            <state line="388" column="66" selection-start="14496" selection-end="14496" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -106,15 +120,16 @@
       <list>
         <option value="$PROJECT_DIR$/../src/example/db9/Main.as" />
         <option value="$PROJECT_DIR$/../src/example/fireball/JSON.as" />
-        <option value="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" />
         <option value="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/skeleton/KinectVector.as" />
         <option value="$PROJECT_DIR$/../src/demo/DemoTheremin.as" />
         <option value="$PROJECT_DIR$/../src/example/db9/texttospeech/TextToSpeech.as" />
         <option value="$PROJECT_DIR$/../src/example/fireball/Main.as" />
-        <option value="$PROJECT_DIR$/../src/examples/db9/Main.as" />
         <option value="$PROJECT_DIR$/../bin/air-app.xml" />
         <option value="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/hands/Hands.as" />
         <option value="$PROJECT_DIR$/../src/examples/fireball/Main.as" />
+        <option value="$PROJECT_DIR$/../src/examples/db9/Main.as" />
+        <option value="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/AbstractKinSenceModule.as" />
+        <option value="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" />
       </list>
     </option>
   </component>
@@ -149,6 +164,8 @@
     </navigator>
     <panes>
       <pane id="Favorites" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -188,84 +205,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kinsence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KinSence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kinsence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="handtracking" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KinSence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fireball" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KinSence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db9" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -279,20 +218,18 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
@@ -300,7 +237,7 @@
       <recent name="F:\Projects\KinSence\sources\client\flash\bin" />
     </key>
   </component>
-  <component name="RunManager" selected="AIR Mobile.Fireball Build &amp; Run On Device">
+  <component name="RunManager" selected="Flex.DB9 Build &amp; Debug">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -314,14 +251,6 @@
       </method>
     </configuration>
     <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="FlexRunConfigurationType" factoryName="Flex" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="false" url_to_launch="http://">
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -347,21 +276,7 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="AirMobileRunConfigurationType" factoryName="AIR Mobile" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="false" url_to_launch="http://">
-      <option name="airMobileRunMode" value="AppDescriptor" />
-      <option name="airMobileRunTarget" value="Emulator" />
-      <option name="debugTransport" value="USB" />
-      <option name="emulator" value="NexusOne" />
-      <option name="existingPackagePath" value="" />
-      <option name="filesToPackage">
-        <list />
-      </option>
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="mobilePackageFileName" value="" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="usbDebugPort" value="7936" />
+    <configuration default="true" type="FlexRunConfigurationType" factoryName="Flex" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="false" url_to_launch="http://">
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -381,6 +296,28 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AirMobileRunConfigurationType" factoryName="AIR Mobile" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="false" url_to_launch="http://">
+      <option name="airMobileRunMode" value="AppDescriptor" />
+      <option name="airMobileRunTarget" value="Emulator" />
+      <option name="debugTransport" value="USB" />
+      <option name="emulator" value="NexusOne" />
+      <option name="existingPackagePath" value="" />
+      <option name="filesToPackage">
+        <list />
+      </option>
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="mobilePackageFileName" value="" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="usbDebugPort" value="7936" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -504,6 +441,10 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\Projects\KinSence\sources\client\flash\project" />
+          <option name="myCopyRoot" value="F:\Projects\KinSence\sources\client\flash\project" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
           <option name="myVcsRoot" value="F:\Projects\KinSence\sources\client\flash" />
           <option name="myCopyRoot" value="F:\Projects\KinSence\sources\client\flash" />
         </SvnCopyRootSimple>
@@ -519,7 +460,7 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1010" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="1010" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -530,8 +471,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2788618" sideWeight="0.6709602" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.39929742" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="-1022" y="2" width="996" height="754" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30650407" sideWeight="0.6709602" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.39929742" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="-1022" y="2" width="996" height="754" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3290398" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1009" y="6" width="537" height="270" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -589,92 +530,110 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../lib/casalib/org/casalib/process/Process.as">
+    <entry file="file://$PROJECT_DIR$/../lib/away3d/away3d/loaders/parsers/OBJParser.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="25" selection-start="2110" selection-end="2110" vertical-scroll-proportion="-0.6908867" />
+        <state line="552" column="24" selection-start="15065" selection-end="15065" vertical-scroll-proportion="0.02093596" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../lib/casalib/org/casalib/process/ProcessGroup.as">
+    <entry file="file://$PROJECT_DIR$/../src/examples/fireball/Main.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.1305419" />
+        <state line="22" column="23" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../lib/casalib/org/casalib/math/Range.as">
+    <entry file="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/air/airglobal.swc!/library.swf">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.3238916" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../lib/casalib/org/casalib/load/GroupLoad.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.067734" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../lib/imotion/nl/imotion/utils/fpsmeter/FPSMeter.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="24" selection-start="2182" selection-end="2182" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../bin/air-app.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="89" selection-start="7858" selection-end="7858" vertical-scroll-proportion="0.47660097" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../../FlashDevelop/Plasma/src/FieryCircle.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="33" selection-start="110" selection-end="110" vertical-scroll-proportion="0.14424242" />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328/frameworks/libs/player/11.0/playerglobal.swc!/library.swf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1048" column="21" selection-start="44994" selection-end="44994" vertical-scroll-proportion="0.33251232" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="24" selection-start="1497" selection-end="1497" vertical-scroll-proportion="0.2060606" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/SkeletonTrackingEvent.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="17" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.2093596" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/hands/HandData.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="125" selection-end="125" vertical-scroll-proportion="0.1030303" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../../FlashDevelop/Plasma/src/Plasma.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="30" selection-start="1037" selection-end="1057" vertical-scroll-proportion="0.07272727">
+        <state line="11488" column="13" selection-start="502081" selection-end="502081" vertical-scroll-proportion="0.33251232">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/examples/db9/Main.as">
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/events/KinSenceModuleEvent.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="481" column="30" selection-start="18168" selection-end="18168" vertical-scroll-proportion="5.9827585">
+        <state line="13" column="36" selection-start="277" selection-end="296" vertical-scroll-proportion="0.27216747">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/hands/Hands.as">
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/AbstractKinSenceModule.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="63" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0">
+        <state line="16" column="90" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/HandTrackingEvent.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/handtracking/HandTrackingModule.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1395" selection-end="1395" vertical-scroll-proportion="0.77463055">
+        <state line="41" column="0" selection-start="1400" selection-end="1400" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/examples/fireball/Main.as">
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/speechrecognition/SpeechRecognitionEvent.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="0" selection-start="4743" selection-end="4743" vertical-scroll-proportion="0.4187192">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/speechrecognition/SpeechRecognitionModule.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/speechrecognition/SpeechRecognitionResult.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/SkeletonTrackingModule.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/skeletontracking/SkeletonTrackingEvent.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/interfaces/IServerMessageHandler.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="21" selection-start="113" selection-end="113" vertical-scroll-proportion="0.1030303">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/interfaces/IKinSenceCore.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="54" selection-start="146" selection-end="146" vertical-scroll-proportion="0.1030303">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/examples/db9/Main.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="388" column="66" selection-start="14496" selection-end="14496" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="7" selection-start="593" selection-end="593" vertical-scroll-proportion="0.10181818">
           <folding />
         </state>
       </provider>

@@ -45,9 +45,9 @@ namespace UsMedia.KinSence
 
         KinSenceCore kinectCore;
         Runtime nui;
-        TcpServer server;
+        IKinSenceServer server;
 
-        Dictionary<JointID,Brush> jointColors = new Dictionary<JointID, Brush>() 
+        Dictionary<JointID, Brush> jointColors = new Dictionary<JointID, Brush>() 
         { 
             {JointID.HipCenter, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
             {JointID.Spine, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
@@ -106,14 +106,14 @@ namespace UsMedia.KinSence
             depthY = depthY * 240; //convert to 320, 240 space
             int colorX, colorY;
             ImageViewArea iv = new ImageViewArea();
-            
-            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel( ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY );
 
-            return new Point( (int)( skeleton.Width * colorX / 640.0 ), (int)( skeleton.Height * colorY / 480 ) );
+            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel( ImageResolution.Resolution640x480, iv, (int) depthX, (int) depthY, (short) 0, out colorX, out colorY );
+
+            return new Point( (int) ( skeleton.Width * colorX / 640.0 ), (int) ( skeleton.Height * colorY / 480 ) );
         }
 
 
-        private Polyline GetBodySegment( Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids )
+        private Polyline GetBodySegment( JointsCollection joints, Brush brush, params JointID[] ids )
         {
             PointCollection points = new PointCollection( ids.Length );
             for ( int i = 0; i < ids.Length; ++i )
@@ -208,26 +208,24 @@ namespace UsMedia.KinSence
         {
             // 32-bit per pixel, RGBA image
             PlanarImage Image = e.ImageFrame.Image;
-            video.Source = BitmapSource.Create(
-                Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel );
+            video.Source = BitmapSource.Create( Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel );
         }
 
 
         private void server_StateChanged( object sender, StateChangedEventArgs e )
         {
-            Dispatcher.CurrentDispatcher.BeginInvoke( DispatcherPriority.Normal,
-            new ThreadStart( delegate()
+            Dispatcher.CurrentDispatcher.BeginInvoke( new Action( () =>
             {
-                indicatorRed.Visibility     = ( e.State == ServerState.Stopped )   ? Visibility.Visible : Visibility.Hidden;
-                indicatorOrange.Visibility  = ( e.State == ServerState.Waiting )   ? Visibility.Visible : Visibility.Hidden;
-                indicatorGreen.Visibility   = ( e.State == ServerState.Connected ) ? Visibility.Visible : Visibility.Hidden;
+                indicatorRed.Visibility = ( e.State == ServerState.Stopped ) ? Visibility.Visible : Visibility.Hidden;
+                indicatorOrange.Visibility = ( e.State == ServerState.Waiting ) ? Visibility.Visible : Visibility.Hidden;
+                indicatorGreen.Visibility = ( e.State == ServerState.Connected ) ? Visibility.Visible : Visibility.Hidden;
             } ) );
         }
 
 
-        private void startButton_Click(object sender, RoutedEventArgs e)
+        private void startButton_Click( object sender, RoutedEventArgs e )
         {
-            server.Start(IPAddress.Parse(inIPAddress.Text), Convert.ToInt16(inPort.Text));
+            server.Start( IPAddress.Parse( inIPAddress.Text ), Convert.ToInt16( inPort.Text ) );
 
             stopButton.IsEnabled = true;
             startButton.IsEnabled =
@@ -236,7 +234,7 @@ namespace UsMedia.KinSence
         }
 
 
-        private void stopButton_Click(object sender, RoutedEventArgs e)
+        private void stopButton_Click( object sender, RoutedEventArgs e )
         {
             server.Stop();
 

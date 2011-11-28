@@ -12,7 +12,7 @@ package nl.usmedia.kinsence.modules.skeletontracking
 
     [Event(name="SkeletonTrackingEvent::SKELETON_TRACKING_UPDATE", type="nl.usmedia.kinsence.modules.skeletontracking.SkeletonTrackingEvent")]
 
-    public class SkeletonTrackingModule extends AbstractKinectModule
+    public class SkeletonTrackingModule extends AbstractKinSenceModule
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES

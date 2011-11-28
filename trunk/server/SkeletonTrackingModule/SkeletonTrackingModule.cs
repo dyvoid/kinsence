@@ -57,9 +57,34 @@ namespace UsMedia.KinSence.Modules.SkeletonTracking
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS
 
-        void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
+        void nui_SkeletonFrameReady( object sender, SkeletonFrameReadyEventArgs e )
         {
-            SendMessage( "SkeletonTrackingUpdate", e.SkeletonFrame );
+            List<SkeletonData> skeletonsList = new List<SkeletonData>();
+            
+            // Collect only skeletons that are being tracked, so we make sure we are not sending unnecessary data
+            foreach ( SkeletonData skeletonData in e.SkeletonFrame.Skeletons )
+            {
+                if ( skeletonData.TrackingState != SkeletonTrackingState.NotTracked )
+                {
+                    skeletonsList.Add( skeletonData );
+                }
+            }
+
+            if ( skeletonsList.Count > 0 )
+            {
+                // We have to make a pseudo copy of the SkeletonFrame, since we cannot change
+                // the Skeletons array and we cannot instantiate a new SkeletonFrame ourselves 
+                // (it does not have a constructor).
+                KinSenceSkeletonFrame skeletonFrame = new KinSenceSkeletonFrame();
+                skeletonFrame.FloorClipPlane = e.SkeletonFrame.FloorClipPlane;
+                skeletonFrame.FrameNumber = e.SkeletonFrame.FrameNumber;
+                skeletonFrame.NormalToGravity = e.SkeletonFrame.NormalToGravity;
+                skeletonFrame.Quality = e.SkeletonFrame.Quality;
+                skeletonFrame.Skeletons = skeletonsList;
+                skeletonFrame.TimeStamp = e.SkeletonFrame.TimeStamp;
+
+                SendMessage( "SkeletonTrackingUpdate", skeletonFrame );
+            }            
         }
     }
 }

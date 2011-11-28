@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace UsMedia.KinSence.Server.Tcp
 {
-    class TcpServer : IServer
+    class TcpServer : IKinSenceServer
     {
 
         // ____________________________________________________________________________________________________

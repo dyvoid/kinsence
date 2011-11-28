@@ -8,14 +8,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="KinSence.exe.manifest" size="5150">
+    <dependentAssembly dependencyType="install" codebase="KinSence.exe.manifest" size="5149">
       <assemblyIdentity name="KinSence.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="en" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XbWdxwZ36h7FdivXV0591pPBNrg=</dsig:DigestValue>
+        <dsig:DigestValue>HFYk/NZ07Y4OOiqgoEyh8dVtOHQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

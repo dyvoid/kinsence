@@ -39,6 +39,8 @@ package nl.usmedia.kinsence
 
         private var _modules    :Dictionary;
 
+        private var _queuedMessages     :Array;
+
         private var _isConnected    :Boolean = false;
 
         // ____________________________________________________________________________________________________
@@ -70,7 +72,7 @@ package nl.usmedia.kinsence
 
             module.core = this;
 
-//            sendMessage( NAME, "RegisterModule", module.name );
+            sendMessage( NAME, "RegisterModule", module.name );
 
             return module;
         }
@@ -84,7 +86,7 @@ package nl.usmedia.kinsence
             {
                 delete _modules[ name ];
 
-//                sendMessage( NAME, "RemoveModule", name );
+                sendMessage( NAME, "RemoveModule", name );
             }
 
             return module;
@@ -99,15 +101,11 @@ package nl.usmedia.kinsence
 
         public function sendMessage( target:String, type:String, data:* = null ):void
         {
-            if ( !_socket.connected ) return;
-
             var message:Object = new Object();
             message.Type = target + "." + type;
             message.Data = data;
 
-//            _socket.writeUTFBytes( example.fireball.JSON.stringify( message ) + "\r\n" );
-            _socket.writeUTFBytes( JSON.stringify( message ) + "\r\n" );
-            _socket.flush();
+            sendMessageObject( message );
         }
 
 
@@ -146,7 +144,28 @@ package nl.usmedia.kinsence
         // ____________________________________________________________________________________________________
         // PRIVATE
 
-        private function deliverMessage( message:Object ):void
+        private function sendMessageObject( messageObject:Object ):void
+        {
+            if ( !_socket || !_socket.connected )
+            {
+                if ( _queuedMessages )
+                {
+                    _queuedMessages.push( messageObject );
+                }
+                else
+                {
+                    _queuedMessages = [ messageObject ];
+                }
+            }
+            else
+            {
+                _socket.writeUTFBytes( JSON.stringify( messageObject ) + "\r\n" );
+                _socket.flush();
+            }
+        }
+
+
+        private function deliverServerMessage( message:Object ):void
         {
             var messageType:String = message.Type;
             var messageTypeArr:Array = messageType.split(".");
@@ -209,9 +228,14 @@ package nl.usmedia.kinsence
             trace("Socket Connected");
             dispatchEvent( event.clone() );
 
-            for each ( var module:IKinSenceModule in _modules )
+            if ( _queuedMessages )
             {
-                sendMessage( NAME, "RegisterModule", module.name );
+                for each ( var message:Object in _queuedMessages )
+                {
+                    sendMessageObject( message );
+                }
+
+                _queuedMessages = null;
             }
         }
 
@@ -239,10 +263,9 @@ package nl.usmedia.kinsence
 
             for ( var i:int = 0; i < packets.length - 1; i++ )
             {
-//                var message:Object = example.fireball.JSON.parse( packets[i] );
                 var message:Object = JSON.parse( packets[i] );
 
-                deliverMessage( message );
+                deliverServerMessage( message );
             }
 
             _readBuffer = packets[ packets.length - 1 ];

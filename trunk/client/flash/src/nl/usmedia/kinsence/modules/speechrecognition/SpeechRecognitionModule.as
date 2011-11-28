@@ -1,6 +1,6 @@
 package nl.usmedia.kinsence.modules.speechrecognition
 {
-    import nl.usmedia.kinsence.modules.AbstractKinectModule;
+    import nl.usmedia.kinsence.modules.AbstractKinSenceModule;
 
 
     /**
@@ -14,7 +14,7 @@ package nl.usmedia.kinsence.modules.speechrecognition
     [Event(name="SpeechRecognitionEvent::SPEECH_RECOGNIZED", type="nl.usmedia.kinsence.modules.speechrecognition.SpeechRecognitionEvent")]
     [Event(name="SpeechRecognitionEvent::SPEECH_RECOGNITION_REJECTED", type="nl.usmedia.kinsence.modules.speechrecognition.SpeechRecognitionEvent")]
 
-    public class SpeechRecognitionModule extends AbstractKinectModule
+    public class SpeechRecognitionModule extends AbstractKinSenceModule
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES

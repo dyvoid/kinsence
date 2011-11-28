@@ -4,21 +4,23 @@
         Title="KinSence" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded" Closed="Window_Closed" Icon="/KinSence;component/kinsence.ico">
     <Window.Background>
+        <ImageBrush ImageSource="/KinSence;component/background.png" Stretch="None" TileMode="FlipX" Viewport="0,0,876,551" ViewportUnits="Absolute" />
+    </Window.Background>
+    <!--Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="White" Offset="0" />
             <GradientStop Color="#b6c3d1" Offset="1" />
         </LinearGradientBrush>
-    </Window.Background>
+    </Window.Background-->
     <StackPanel Orientation="Vertical">
         <Canvas Height="48">
+            <Image Width="124" Height="50" Source="/KinSence;component/logo.png" Canvas.Left="20" Canvas.Top="8" />
             <Canvas.Background>
-                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                    <GradientStop Color="#FFFFFFFF" Offset="0" />
-                    <GradientStop Color="#FFb6c3d1" Offset="0.5" />
-                    <GradientStop Color="#FFFFFFFF" Offset="1" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="#FFDBE0E5" Offset="1" />
                 </LinearGradientBrush>
             </Canvas.Background>
-            <Image Width="124" Height="50" Source="/KinSence;component/logo.png" Canvas.Left="20" Canvas.Top="8" />
         </Canvas>
         <StackPanel Height="Auto" Margin="20" Width="Auto"  Orientation="Horizontal">
             <Canvas Width="14" Height="14">
@@ -30,7 +32,7 @@
                         </RadialGradientBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Height="14" Name="indicatorOrange" Stroke="Black" Width="14">
+                <Ellipse Height="14" Name="indicatorOrange" Stroke="Black" Width="14" Visibility="Hidden">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop Color="Orange" Offset="1" />
@@ -38,7 +40,7 @@
                         </RadialGradientBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Height="14" Name="indicatorGreen" Stroke="Black" Width="14">
+                <Ellipse Height="14" Name="indicatorGreen" Stroke="Black" Width="14" Visibility="Hidden">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop Color="Green" Offset="1" />
@@ -49,7 +51,7 @@
             </Canvas>
             <Label Content="IP Address" Height="28" Foreground="Black" />
             <TextBox Height="23" Name="inIPAddress" Width="120" Text="192.168.1.7" MaxLength="15" AutoWordSelection="True" />
-            <Label Content="Port" Height="28" Foreground="White" />
+            <Label Content="Port" Height="28" Foreground="Black" />
             <TextBox Height="23" Name="inPort" Text="3000" Width="38" MaxLength="4" />
             <Button Content="Start" Height="23" Name="startButton" Width="75" Margin="10 0 0 0" Click="startButton_Click" />
             <Button Content="Stop" Height="23" Name="stopButton" Width="75" Margin="10 0 0 0" Click="stopButton_Click" IsEnabled="False" />

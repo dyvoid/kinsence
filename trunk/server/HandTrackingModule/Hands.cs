@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UsMedia.KinSence.Modules.HandTracking
 {
-    class Hands
+    public class Hands
     {
         public int SkeletonTrackingID;
         public int SkeletonUserIndex;
