@@ -28,9 +28,9 @@ package nl.usmedia.kinsence.modules
 {
     import flash.events.EventDispatcher;
 
-    import nl.usmedia.kinsence.interfaces.IKinSenceCore;
+    import nl.usmedia.kinsence.IKinSenceCore;
 
-    import nl.usmedia.kinsence.interfaces.IKinSenceModule;
+    import nl.usmedia.kinsence.modules.IKinSenceModule;
 
 
     /**

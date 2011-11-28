@@ -24,13 +24,26 @@
  * http://www.usmedia.nl
  */
 
-package nl.usmedia.kinsence.interfaces
+package nl.usmedia.kinsence.modules
 {
+    import flash.events.IEventDispatcher;
+
+    import nl.usmedia.kinsence.IKinSenceCore;
+
+    import nl.usmedia.kinsence.IServerMessageHandler;
+
+
     /**
      * @author Pieter van de Sluis
      */
-    public interface IServerMessageHandler
+    public interface IKinSenceModule extends IServerMessageHandler, IEventDispatcher
     {
-        function onServerMessage( type:String, data:* ):void
+        function onRegister():void
+        function onRemove():void
+
+        function get core():IKinSenceCore
+        function set core( value:IKinSenceCore ):void
+
+        function get name():String
     }
 }

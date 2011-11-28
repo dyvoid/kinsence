@@ -36,9 +36,9 @@ package nl.usmedia.kinsence
     import flash.net.Socket;
     import flash.utils.Dictionary;
 
-    import nl.usmedia.kinsence.interfaces.IKinSenceCore;
+    import nl.usmedia.kinsence.IKinSenceCore;
 
-    import nl.usmedia.kinsence.interfaces.IKinSenceModule;
+    import nl.usmedia.kinsence.modules.IKinSenceModule;
 
     import nl.usmedia.kinsence.modules.events.KinSenceModuleEvent;
     import nl.usmedia.kinsence.transformsmooth.TransformSmoothParameters;
