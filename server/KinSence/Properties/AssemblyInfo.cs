@@ -16,7 +16,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("KinSence")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription( "TCP server that enables developers to make use of Kinect, without being tied to a .NET environment" )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany( "Us Media" )]
 [assembly: AssemblyProduct("KinSence")]
@@ -59,7 +59,7 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "0.8.0.0" )]
+[assembly: AssemblyVersion( "0.8.*" )]
 [assembly: AssemblyFileVersion( "0.8.0.0" )]
 [assembly: GuidAttribute( "388B28FC-0A16-11E1-9B38-00054924019B" )]
 [assembly: NeutralResourcesLanguageAttribute( "en" )]

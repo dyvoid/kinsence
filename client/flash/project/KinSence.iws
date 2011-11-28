@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="9c880b57-cebc-4106-976c-7b2f84c0922d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/KinSence.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/AbstractKinSenceModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/AbstractKinSenceModule.as" />
-      <change type="MOVED" beforePath="F:\Projects\KinSence\sources\client\flash\src\nl\usmedia\kinsence\interfaces\IKinSenceCore.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/IKinSenceCore.as" />
-      <change type="MOVED" beforePath="F:\Projects\KinSence\sources\client\flash\src\nl\usmedia\kinsence\interfaces\IKinSenceModule.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/modules/IKinSenceModule.as" />
-      <change type="MOVED" beforePath="F:\Projects\KinSence\sources\client\flash\src\nl\usmedia\kinsence\interfaces\IServerMessageHandler.as" afterPath="$PROJECT_DIR$/../src/nl/usmedia/kinsence/IServerMessageHandler.as" />
-    </list>
+    <list default="true" readonly="true" id="9c880b57-cebc-4106-976c-7b2f84c0922d" name="Default" comment="" />
     <ignored path="KinSence.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
