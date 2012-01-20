@@ -26,7 +26,6 @@
 
 package nl.usmedia.kinsence
 {
-    import nl.usmedia.kinsence.interfaces.*;
     import nl.usmedia.kinsence.modules.IKinSenceModule;
 
 
