@@ -31,7 +31,7 @@ package nl.usmedia.kinsence.modules.handtracking
     import nl.imotion.events.*;
     import flash.events.Event;
 
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.KinSenceVector;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonPoint;
 
 
     /**

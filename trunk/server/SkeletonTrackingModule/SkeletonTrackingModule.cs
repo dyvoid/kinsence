@@ -30,7 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using UsMedia.KinSence.Server;
 
 namespace UsMedia.KinSence.Modules.SkeletonTracking
@@ -41,13 +41,15 @@ namespace UsMedia.KinSence.Modules.SkeletonTracking
         // PROPERTIES
 
         public static readonly string NAME = "SkeletonTracking";
+		
+		private KinectSensor sensor;
 
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
         public SkeletonTrackingModule() : base( NAME )
         {
-
+			sensor = KinectSensor.KinectSensors[0];
         }
 
         // ____________________________________________________________________________________________________
@@ -57,14 +59,14 @@ namespace UsMedia.KinSence.Modules.SkeletonTracking
         {
             base.OnRegister();
 
-            Nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>( nui_SkeletonFrameReady );
+            sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>( sensor_SkeletonFrameReady );
         }
 
         public override void OnRemove()
         {
             base.OnRemove();
 
-            Nui.SkeletonFrameReady -= nui_SkeletonFrameReady;
+			sensor.SkeletonFrameReady -= sensor_SkeletonFrameReady;
         }
 
         // ____________________________________________________________________________________________________
@@ -85,34 +87,47 @@ namespace UsMedia.KinSence.Modules.SkeletonTracking
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS
 
-        void nui_SkeletonFrameReady( object sender, SkeletonFrameReadyEventArgs e )
+        void sensor_SkeletonFrameReady( object sender, SkeletonFrameReadyEventArgs e )
         {
-            List<SkeletonData> skeletonsList = new List<SkeletonData>();
-            
-            // Collect only skeletons that are being tracked, so we make sure we are not sending unnecessary data
-            foreach ( SkeletonData skeletonData in e.SkeletonFrame.Skeletons )
+            Skeleton[] skeletons = new Skeleton[0];
+
+            // We have to make a pseudo copy of the SkeletonFrame, since we cannot change
+            // the Skeletons array 
+            KinSenceSkeletonFrame kinSenceSkeletonFrame = new KinSenceSkeletonFrame();
+
+            using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
             {
-                if ( skeletonData.TrackingState != SkeletonTrackingState.NotTracked )
+                if (skeletonFrame != null)
                 {
-                    skeletonsList.Add( skeletonData );
+                    if (skeletonFrame.SkeletonArrayLength == 0)
+                        return;
+
+                    skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
+                    skeletonFrame.CopySkeletonDataTo(skeletons);
+                    
+                    kinSenceSkeletonFrame.FloorClipPlane = skeletonFrame.FloorClipPlane;
+                    kinSenceSkeletonFrame.FrameNumber = skeletonFrame.FrameNumber;                   
+                    kinSenceSkeletonFrame.Timestamp = skeletonFrame.Timestamp;
                 }
             }
 
-            if ( skeletonsList.Count > 0 )
-            {
-                // We have to make a pseudo copy of the SkeletonFrame, since we cannot change
-                // the Skeletons array and we cannot instantiate a new SkeletonFrame ourselves 
-                // (it does not have a constructor).
-                KinSenceSkeletonFrame skeletonFrame = new KinSenceSkeletonFrame();
-                skeletonFrame.FloorClipPlane = e.SkeletonFrame.FloorClipPlane;
-                skeletonFrame.FrameNumber = e.SkeletonFrame.FrameNumber;
-                skeletonFrame.NormalToGravity = e.SkeletonFrame.NormalToGravity;
-                skeletonFrame.Quality = e.SkeletonFrame.Quality;
-                skeletonFrame.Skeletons = skeletonsList;
-                skeletonFrame.TimeStamp = e.SkeletonFrame.TimeStamp;
+            List<Skeleton> trackedSkeletons = new List<Skeleton>();
 
-                SendMessage( "SkeletonTrackingUpdate", skeletonFrame );
-            }            
+            // Collect only skeletons that are being tracked, so we make sure we are not sending unnecessary data
+            foreach (Skeleton skeleton in skeletons)
+            {
+                if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
+                {
+                    trackedSkeletons.Add(skeleton);
+                }
+            }
+            
+            if (trackedSkeletons.Count > 0)
+            {
+                kinSenceSkeletonFrame.Skeletons = trackedSkeletons;
+
+                SendMessage("SkeletonTrackingUpdate", kinSenceSkeletonFrame);
+            }
         }
     }
 }

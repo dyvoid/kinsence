@@ -31,7 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using UsMedia.KinSence.Messages;
 using UsMedia.KinSence.Server;
 using UsMedia.KinSence.Modules;
@@ -84,7 +84,7 @@ namespace UsMedia.KinSence.Modules
 
         public IKinSenceCore Core { get { return this.core; } set { this.core = value; } }
 
-        protected Runtime Nui { get { return Core.Nui; } }
+        protected KinectSensor Sensor { get { return Core.Sensor; } }
 
         // ____________________________________________________________________________________________________
         // EVENT HANDLERS        

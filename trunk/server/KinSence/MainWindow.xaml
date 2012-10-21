@@ -45,7 +45,7 @@
                 </Ellipse>
             </Canvas>
             <Label Content="IP Address" Height="28" Foreground="Black" />
-            <TextBox Height="23" Name="inIPAddress" Width="96" Text="192.128.1.7" MaxLength="15" />
+            <TextBox Height="23" Name="inIPAddress" Width="96" Text="192.128.1.6" MaxLength="15" />
             <Label Content="Port" Height="28" Foreground="Black" />
             <TextBox Height="23" Name="inPort" Text="3000" Width="47" MaxLength="5" />
             <Button Content="Start" Height="23" Name="startButton" Width="75" Margin="10 0 0 0" Click="startButton_Click" />
@@ -57,14 +57,14 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <Canvas Width="400" Height="300" Background="Black" Margin="0 0 10 0">
-                        <Image Width="400" Height="300" Name="video" ClipToBounds="True" />
+                        <Image Width="400" Height="300" Name="ColorImage" ClipToBounds="True" />
                         <Border BorderBrush="#FF555555" BorderThickness="1" Width="400" Height="300" />
                     </Canvas>
                     <Label FontSize="12" Focusable="False" Content="Video" HorizontalAlignment="Center" Foreground="Black" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Canvas Width="400" Height="300" Background="Black" Margin="10 0 0 0">
-                        <Canvas Width="400" Height="300" Name="skeleton" ClipToBounds="True" />
+                        <Image Name="SkeletonImage" Width="400" Height="300"/>
                         <Border BorderBrush="#FF555555" BorderThickness="1" Width="400" Height="300"/>
                     </Canvas>
                     <Label FontSize="12" Focusable="False" Content="Skeleton" HorizontalAlignment="Center" Foreground="Black" />

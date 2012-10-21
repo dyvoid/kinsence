@@ -31,7 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using UsMedia.KinSence.Util;
 
 namespace UsMedia.KinSence.Modules.HandTracking
@@ -43,6 +43,8 @@ namespace UsMedia.KinSence.Modules.HandTracking
 
         public static readonly string NAME = "HandTracking";
 
+        private KinectSensor sensor;
+
         private double armLength = 0;
 
         // ____________________________________________________________________________________________________
@@ -50,7 +52,7 @@ namespace UsMedia.KinSence.Modules.HandTracking
 
         public HandTrackingModule() : base( NAME )
         {
-
+            sensor = KinectSensor.KinectSensors[0];
         }
 
         // ____________________________________________________________________________________________________
@@ -60,7 +62,7 @@ namespace UsMedia.KinSence.Modules.HandTracking
         {
             base.OnRegister();
 
-            Nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>( nui_SkeletonFrameReady );
+            sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
         }
 
 
@@ -68,7 +70,7 @@ namespace UsMedia.KinSence.Modules.HandTracking
         {
             base.OnRemove();
 
-            Nui.SkeletonFrameReady -= nui_SkeletonFrameReady;
+            sensor.SkeletonFrameReady -= nui_SkeletonFrameReady;
         }
 
         // ____________________________________________________________________________________________________
@@ -79,30 +81,29 @@ namespace UsMedia.KinSence.Modules.HandTracking
         // ____________________________________________________________________________________________________
         // PROTECTED
 
-        protected virtual void processSkeletons( SkeletonData[] skeletons )
+        protected virtual void processSkeletons( Skeleton[] skeletons )
         {
             List<Hands> handsCollection = new List<Hands>();
 
-            foreach ( SkeletonData data in skeletons )
+            foreach ( Skeleton data in skeletons )
             {
                 if ( data.TrackingState == SkeletonTrackingState.Tracked )
                 {
                     Hands hands = new Hands();
-                    hands.SkeletonTrackingID = data.TrackingID;
-                    hands.SkeletonUserIndex = data.UserIndex;
+                    hands.SkeletonTrackingID = data.TrackingId;
 
-                    hands.Left = CreateHandData( data.Joints[ JointID.ShoulderLeft ],
-                        data.Joints[ JointID.ElbowLeft ],
-                        data.Joints[ JointID.HandLeft ] );
-                    hands.Left.TrackingState = data.Joints[ JointID.HandLeft ].TrackingState;
+                    hands.Left = CreateHandData( data.Joints[ JointType.ShoulderLeft ],
+                        data.Joints[JointType.ElbowLeft],
+                        data.Joints[JointType.HandLeft]);
+                    hands.Left.TrackingState = data.Joints[JointType.HandLeft].TrackingState;
 
-                    hands.Right = CreateHandData( data.Joints[ JointID.ShoulderRight ],
-                        data.Joints[ JointID.ElbowRight ],
-                        data.Joints[ JointID.HandRight ] );
-                    hands.Right.TrackingState = data.Joints[ JointID.HandRight ].TrackingState;
+                    hands.Right = CreateHandData(data.Joints[JointType.ShoulderRight],
+                        data.Joints[JointType.ElbowRight],
+                        data.Joints[JointType.HandRight]);
+                    hands.Right.TrackingState = data.Joints[JointType.HandRight].TrackingState;
 
-                    double maxHandsDistance = armLength * 2 + CalcVectorDistance(data.Joints[JointID.ShoulderLeft].Position, data.Joints[JointID.ShoulderRight].Position);
-                    double handsDistance = CalcVectorDistance(data.Joints[JointID.HandLeft].Position, data.Joints[JointID.HandRight].Position);
+                    double maxHandsDistance = armLength * 2 + CalcSkeletonPointDistance(data.Joints[JointType.ShoulderLeft].Position, data.Joints[JointType.ShoulderRight].Position);
+                    double handsDistance = CalcSkeletonPointDistance(data.Joints[JointType.HandLeft].Position, data.Joints[JointType.HandRight].Position);
                     hands.DistanceRatio = handsDistance / maxHandsDistance;
                     if (hands.DistanceRatio > 1)
                         hands.DistanceRatio = 1;
@@ -127,8 +128,8 @@ namespace UsMedia.KinSence.Modules.HandTracking
                  handJoint.TrackingState != JointTrackingState.NotTracked )
             {
                 armLength = 0;
-                armLength += Math.Abs( CalcVectorDistance( shoulderJoint.Position, elbowJoint.Position ) );
-                armLength += Math.Abs( CalcVectorDistance( elbowJoint.Position, handJoint.Position ) );
+                armLength += Math.Abs( CalcSkeletonPointDistance( shoulderJoint.Position, elbowJoint.Position ) );
+                armLength += Math.Abs( CalcSkeletonPointDistance( elbowJoint.Position, handJoint.Position ) );
             }
 
             Range xRange = new Range( 0.8 * -armLength, armLength );
@@ -147,11 +148,11 @@ namespace UsMedia.KinSence.Modules.HandTracking
         }
 
 
-        protected double CalcVectorDistance( Vector vector1, Vector vector2 )
+        protected double CalcSkeletonPointDistance( SkeletonPoint point1, SkeletonPoint point2 )
         {
-            return Math.Sqrt( Math.Pow( vector2.X - vector1.X, 2 ) +
-                Math.Pow( vector2.Y - vector1.Y, 2 ) +
-                Math.Pow( vector2.Z - vector1.Z, 2 ) );
+            return Math.Sqrt( Math.Pow( point2.X - point1.X, 2 ) +
+                Math.Pow( point2.Y - point1.Y, 2 ) +
+                Math.Pow( point2.Z - point1.Z, 2 ) );
         }
 
         // ____________________________________________________________________________________________________
@@ -164,7 +165,21 @@ namespace UsMedia.KinSence.Modules.HandTracking
 
         void nui_SkeletonFrameReady( object sender, SkeletonFrameReadyEventArgs e )
         {
-            processSkeletons( e.SkeletonFrame.Skeletons );
+            Skeleton[] skeletons = new Skeleton[0];
+
+            using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
+            {
+                if (skeletonFrame != null)
+                {
+                    if (skeletonFrame.SkeletonArrayLength == 0)
+                        return;
+
+                    skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
+                    skeletonFrame.CopySkeletonDataTo(skeletons);
+                }
+            }
+
+            processSkeletons(skeletons);
         }
 
     }

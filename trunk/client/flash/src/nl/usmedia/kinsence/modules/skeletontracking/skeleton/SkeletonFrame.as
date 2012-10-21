@@ -34,11 +34,10 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         // ____________________________________________________________________________________________________
         // PROPERTIES
 
-        public var floorClipPlane:KinSenceVector;
+        public var floorClipPlane:SkeletonPoint;
         public var frameNumber:int;
-        public var normalToGravity:KinSenceVector;
-        public var quality:uint;
-        public var skeletons:Vector.<SkeletonData>;
+        public var normalToGravity:SkeletonPoint;
+        public var skeletons:Vector.<Skeleton>;
         public var timeStamp:uint;
 
         // ____________________________________________________________________________________________________
@@ -54,20 +53,18 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
 
         public function fromObject( object:Object ):void
         {
-            floorClipPlane = new KinSenceVector();
+            floorClipPlane = new SkeletonPoint();
             floorClipPlane.fromObject( object.FloorClipPlane );
 
             frameNumber = object.FrameNumber;
 
-            normalToGravity = new KinSenceVector();
+            normalToGravity = new SkeletonPoint();
             normalToGravity.fromObject( object.NormalToGravity );
 
-            quality = uint( object.Quality );
-
-            skeletons = new Vector.<SkeletonData>();
+            skeletons = new Vector.<Skeleton>();
             for each ( var skeletonObject:Object in object.Skeletons )
             {
-                var skeletonData:SkeletonData = new SkeletonData();
+                var skeletonData:Skeleton = new Skeleton();
                 skeletonData.fromObject( skeletonObject );
                 skeletons[ skeletons.length ] = skeletonData;
             }

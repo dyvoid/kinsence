@@ -31,10 +31,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Microsoft.Research.Kinect.Audio;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
 using System.Threading;
@@ -124,7 +123,6 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
             {
                 sre.RecognizeAsyncCancel();
                 sre.RecognizeAsyncStop();
-                kinectSource.Dispose();
             }
         }
 
@@ -246,10 +244,8 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
         protected virtual void InitEngine()
         {
             kinectSource = new KinectAudioSource();
-            kinectSource.SystemMode = SystemMode.OptibeamArrayOnly;
-            kinectSource.FeatureMode = true;
-            kinectSource.AutomaticGainControl = false;
-            kinectSource.MicArrayMode = MicArrayMode.MicArrayAdaptiveBeam;
+            kinectSource.EchoCancellationMode = EchoCancellationMode.None;
+            kinectSource.AutomaticGainControlEnabled = false;
             var kinectStream = kinectSource.Start();
             sre.SetInputToAudioStream( kinectStream, new SpeechAudioFormatInfo(
                                                   EncodingFormat.Pcm, 16000, 16, 1,

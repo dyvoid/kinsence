@@ -37,16 +37,13 @@ package examples.fireball
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
-    import flash.errors.IOError;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import flash.events.SampleDataEvent;
     import flash.geom.ColorTransform;
-    import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.media.Sound;
-    import flash.system.SecurityPrivilege;
     import flash.text.TextField;
 
     import nl.imotion.utils.fpsmeter.FPSMeter;
@@ -57,17 +54,8 @@ package examples.fireball
     import nl.usmedia.kinsence.modules.handtracking.HandTrackingEvent;
     import nl.usmedia.kinsence.modules.handtracking.HandTrackingModule;
     import nl.usmedia.kinsence.modules.handtracking.hands.Hands;
-    import nl.usmedia.kinsence.modules.skeletontracking.SkeletonTrackingEvent;
-    import nl.usmedia.kinsence.modules.skeletontracking.SkeletonTrackingModule;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.JointID;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.KinSenceVector;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonData;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonTrackingState;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonPoint;
     import nl.usmedia.kinsence.transformsmooth.TransformSmoothParameters;
-
-    import org.casalib.math.Percent;
-
-    import org.casalib.util.ColorUtil;
 
 
     /**
@@ -111,6 +99,7 @@ package examples.fireball
         [Embed("../../../assets/Flashbang-Kibblesbob-899170896.mp3")]
         private var BoltCastSound:Class;
 
+
         private var _boltCastSound:Sound;
 
         // ____________________________________________________________________________________________________
@@ -152,7 +141,7 @@ package examples.fireball
             _kinSence.addEventListener( Event.CONNECT, connectHandler );
             _kinSence.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler );
 //            _kinSence.connect( "127.0.0.1", 3000 );
-            _kinSence.connect( "192.168.1.7", 3000 );
+            _kinSence.connect( "192.168.1.6", 3000 );
 
             _handTracking = new HandTrackingModule();
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
@@ -216,8 +205,7 @@ package examples.fireball
         private function connectHandler( event:Event ):void
         {
             _kinSence.setElevationAngle( 0 );
-            _kinSence.setTransformSmooth( true );
-            _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
+           // _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
 
             trace( "connected" );
 
@@ -225,7 +213,7 @@ package examples.fireball
         }
 
 
-        private function calcVectorDistance( vector1:KinSenceVector, vector2:KinSenceVector ):Number
+        private function calcVectorDistance( vector1:SkeletonPoint, vector2:SkeletonPoint ):Number
         {
             return Math.sqrt(
                 Math.pow( vector2.x - vector1.x, 2 ) +
@@ -299,8 +287,7 @@ package examples.fireball
 
                     if ( _intensity > 0.9 )
                     {
-                        _intensity = 0;
-                        _boltCastSound.play();
+                        fire();
                     }
                 }
                 else
@@ -311,13 +298,18 @@ package examples.fireball
         }
 
 
+        private function fire():void
+        {
+            _intensity = 0;
+            _boltCastSound.play();
+        }
+
+
         private function enterFrameHandler( e:Event ):void
         {
-            trace(_intensity);
-
             fpsText.text = _fpsMeter.fps.toString();
             
-            _intensity += ( _intensityTarget - _intensity ) / 60;
+            _intensity += ( _intensityTarget - _intensity ) / 15;
 
             _clouds1.alpha = _intensity;
             _clouds2.alpha = _intensity;

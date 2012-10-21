@@ -86,10 +86,10 @@ package examples.db9
     import nl.usmedia.kinsence.modules.skeletontracking.SkeletonTrackingEvent;
     import nl.usmedia.kinsence.modules.skeletontracking.SkeletonTrackingModule;
     import nl.usmedia.kinsence.modules.skeletontracking.skeleton.Joint;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.JointID;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.JointType;
     import nl.usmedia.kinsence.modules.skeletontracking.skeleton.JointTrackingState;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.KinSenceVector;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonData;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonPoint;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.Skeleton;
     import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonTrackingState;
     import nl.usmedia.kinsence.modules.speechrecognition.SpeechRecognitionEvent;
     import nl.usmedia.kinsence.modules.speechrecognition.SpeechRecognitionModule;
@@ -238,7 +238,7 @@ package examples.db9
             _kinSence.registerModule( _handTracking );
 
 //            _kinSence.connect( "127.0.0.1", 3000 );
-              _kinSence.connect( "192.168.1.7", 3000 );
+              _kinSence.connect( "192.168.1.6", 3000 );
         }
 
 
@@ -415,7 +415,6 @@ package examples.db9
         private function connectSuccessHandler( event:Event ):void
         {
             _kinSence.setElevationAngle( 10 );
-            _kinSence.setTransformSmooth( true );
             _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
 
             _tts.say( "connected to server" );
@@ -461,14 +460,14 @@ package examples.db9
 
         private function skeletonTrackingUpdateHandler( e:SkeletonTrackingEvent ):void
         {
-            for each ( var skeletonData:SkeletonData in e.skeletonFrame.skeletons)
+            for each ( var skeletonData:Skeleton in e.skeletonFrame.skeletons)
             {
                 if ( skeletonData.trackingState == SkeletonTrackingState.TRACKED )
                 {
                     var joint:Joint;
-                    var position:KinSenceVector;
+                    var position:SkeletonPoint;
 
-                    joint = skeletonData.getJointByID( JointID.HEAD );
+                    joint = skeletonData.getJointByID( JointType.HEAD );
 
                     if ( joint.trackingState != JointTrackingState.NOT_TRACKED )
                     {

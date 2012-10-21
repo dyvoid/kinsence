@@ -30,7 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using UsMedia.KinSence.Modules;
 
 namespace UsMedia.KinSence
@@ -43,6 +43,6 @@ namespace UsMedia.KinSence
 
         void SendMessage( string target, string type, dynamic data );
 
-        Runtime Nui { get; }
+        KinectSensor Sensor { get; }
     }
 }

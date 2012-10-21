@@ -36,8 +36,6 @@ package nl.usmedia.kinsence
     import flash.net.Socket;
     import flash.utils.Dictionary;
 
-    import nl.usmedia.kinsence.IKinSenceCore;
-
     import nl.usmedia.kinsence.modules.IKinSenceModule;
 
     import nl.usmedia.kinsence.modules.events.KinSenceModuleEvent;
@@ -144,12 +142,6 @@ package nl.usmedia.kinsence
         public function setElevationAngle( elevationAngle:Number ):void
         {
             sendMessage( NAME, "SetElevationAngle", elevationAngle );
-        }
-
-
-        public function setTransformSmooth( isEnabled:Boolean ):void
-        {
-            sendMessage( NAME, "SetTransformSmooth", isEnabled );
         }
 
 

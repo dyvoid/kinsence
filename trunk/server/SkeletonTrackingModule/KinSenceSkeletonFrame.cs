@@ -30,17 +30,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 
 namespace UsMedia.KinSence.Modules.SkeletonTracking
 {
     class KinSenceSkeletonFrame
     {
-        public Vector FloorClipPlane;
+        public Tuple<float, float, float, float> FloorClipPlane;
         public int FrameNumber;
-        public Vector NormalToGravity;
-        public SkeletonFrameQuality Quality;
-        public List<SkeletonData> Skeletons;
-        public long TimeStamp;
+        public List<Skeleton> Skeletons;
+        public long Timestamp;
     }
 }

@@ -29,7 +29,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
     /**
      * @author Pieter van de Sluis
      */
-    public class KinSenceVector
+    public class SkeletonPoint
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES
@@ -42,7 +42,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
-        public function KinSenceVector( x:Number = NaN, y:Number = NaN, z:Number = NaN, w:Number = NaN )
+        public function SkeletonPoint( x:Number = NaN, y:Number = NaN, z:Number = NaN, w:Number = NaN )
         {
             this.x = x;
             this.y = y;

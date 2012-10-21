@@ -35,7 +35,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         // PROPERTIES
 
 		public var id:uint;
-        public var position:KinSenceVector;
+        public var position:SkeletonPoint;
         public var trackingState:uint;
 
         // ____________________________________________________________________________________________________
@@ -53,7 +53,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         {
             id = object.ID;
 
-            position = new KinSenceVector();
+            position = new SkeletonPoint();
             position.fromObject( object.Position );
 
             trackingState = object.TrackingState;
