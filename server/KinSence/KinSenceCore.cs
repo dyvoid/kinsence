@@ -31,7 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using UsMedia.KinSence.Server;
 using UsMedia.KinSence.Messages;
 using UsMedia.KinSence.Modules;
@@ -52,7 +52,7 @@ namespace UsMedia.KinSence
 
         public static readonly string NAME = "Core";
 
-        private Runtime nui;
+        private KinectSensor sensor;
         private IKinSenceServer server;
 
         private Dictionary<string, IKinSenceModule> activeModules;
@@ -112,19 +112,13 @@ namespace UsMedia.KinSence
 
         public virtual void SetElevationAngle( int elevationAngle )
         {
-            nui.NuiCamera.ElevationAngle = elevationAngle;
-        }
-
-
-        public virtual void SetTransformSmooth( bool isEnabled )
-        {
-            nui.SkeletonEngine.TransformSmooth = isEnabled;
+            sensor.ElevationAngle = elevationAngle;
         }
 
 
         public virtual void SetTransformSmoothParameters( TransformSmoothParameters smoothParameters )
         {
-            nui.SkeletonEngine.SmoothParameters = smoothParameters;
+            sensor.SkeletonStream.Enable(smoothParameters);
         }
 
 
@@ -176,10 +170,6 @@ namespace UsMedia.KinSence
                     SetElevationAngle( Convert.ToInt32( data ) );
                     break;
 
-                case "SetTransformSmooth":
-                    SetTransformSmooth( Convert.ToBoolean( data ) );
-                    break;
-
                 case "SetTransformSmoothParameters":
                     TransformSmoothParameters smoothParams = new TransformSmoothParameters();
 
@@ -201,7 +191,7 @@ namespace UsMedia.KinSence
         {
             try
             {
-                nui = Runtime.Kinects[ 0 ];
+                sensor = KinectSensor.KinectSensors[0];
             }
             catch ( Exception )
             {
@@ -211,21 +201,33 @@ namespace UsMedia.KinSence
 
             try
             {
-                nui.Initialize( RuntimeOptions.UseSkeletalTracking | RuntimeOptions.UseColor );
+                sensor.SkeletonStream.Enable();
             }
             catch ( Exception )
             {
-                System.Windows.MessageBox.Show( "Runtime initialization failed. Please make sure Kinect device is plugged in." );
+                System.Windows.MessageBox.Show( "Failed to enable skeleton stream." );
                 return;
             }
 
             try
             {
-                nui.VideoStream.Open( ImageStreamType.Video, 2, ImageResolution.Resolution640x480, ImageType.Color );
+                //sensor.VideoStream.Open( ImageStreamType.Video, 2, ImageResolution.Resolution640x480, ImageType.Color );
+                sensor.ColorStream.Enable();
             }
             catch ( Exception )
             {
                 System.Windows.MessageBox.Show( "Failed to open stream. Please make sure to specify a supported image type and resolution." );
+                return;
+            }
+
+            // Start the sensor!
+            try
+            {
+                this.sensor.Start();
+            }
+            catch (IOException)
+            {
+                System.Windows.MessageBox.Show("Failed to start the sensor.");
                 return;
             }
 
@@ -268,7 +270,7 @@ namespace UsMedia.KinSence
         // ____________________________________________________________________________________________________
         // GETTERS / SETTERS
 
-        public Runtime Nui { get { return nui; } }
+        public KinectSensor Sensor { get { return sensor; } }
         public IKinSenceServer Server { get { return server; } }
 
         // ____________________________________________________________________________________________________

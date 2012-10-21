@@ -29,13 +29,13 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
     /**
      * @author Pieter van de Sluis
      */
-    public class SkeletonData
+    public class Skeleton
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES
 
         public var joints:Vector.<Joint>;
-        public var position:KinSenceVector;
+        public var position:SkeletonPoint;
         public var quality:uint;
         public var trackingID:int;
         public var trackingState:uint;
@@ -44,7 +44,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
 
-        public function SkeletonData()
+        public function Skeleton()
         {
         }
 
@@ -62,7 +62,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
                 joints[ joints.length ] = joint;
             }
 
-            position = new KinSenceVector();
+            position = new SkeletonPoint();
             position.fromObject( object.Position );
 
             quality = uint( object.Quality );

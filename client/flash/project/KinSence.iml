@@ -1,64 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="flex" name="DB9 Debug">
-      <configuration flex_sdk="Flex SDK 4.5.1.21328 AIR AIR Mobile">
-        <option name="DO_BUILD" value="true" />
-        <option name="OUTPUT_TYPE" value="Application" />
-        <option name="USE_DEFAULT_SDK_CONFIG_FILE" value="true" />
-        <option name="USE_CUSTOM_CONFIG_FILE" value="false" />
-        <option name="CUSTOM_CONFIG_FILE" value="" />
-        <option name="USE_CUSTOM_CONFIG_FILE_FOR_TESTS" value="false" />
-        <option name="CUSTOM_CONFIG_FILE_FOR_TESTS" value="" />
-        <option name="APPLICATION_ENTRY_POINT" value="" />
-        <option name="MAIN_CLASS" value="examples.db9.Main" />
-        <option name="OUTPUT_FILE_NAME" value="db9_debug.swf" />
-        <option name="USE_FACET_COMPILE_OUTPUT_PATH" value="true" />
-        <option name="FACET_COMPILE_OUTPUT_PATH" value="$MODULE_DIR$/../bin" />
-        <option name="FACET_COMPILE_OUTPUT_PATH_FOR_TESTS" value="" />
-        <option name="INCLUDE_RESOURCE_FILES_IN_SWC" value="false" />
-        <option name="TARGET_PLAYER_VERSION" value="11.0.0" />
-        <option name="STATIC_LINK_RUNTIME_SHARED_LIBRARIES" value="true" />
-        <option name="USE_LOCALE_SETTINGS" value="false" />
-        <option name="LOCALE" value="en_US" />
-        <option name="ADDITIONAL_COMPILER_OPTIONS" value="-swf-version=13 -static-link-runtime-shared-libraries=true" />
-        <option name="PATH_TO_SERVICES_CONFIG_XML" value="" />
-        <option name="CONTEXT_ROOT" value="" />
-        <option name="VERSION" value="3" />
-        <NAMESPACE_AND_MANIFEST_FILE_INFO_LIST />
-        <CONDITIONAL_COMPILATION_DEFINITION_LIST />
-        <CSS_FILES_LIST />
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="DB9 Debug">
+    <configurations>
+      <configuration name="DB9 Debug" pure-as="true" main-class="examples.db9.Main" output-file="db9_debug.swf" output-folder="$MODULE_DIR$/../bin">
+        <dependencies target-player="11.1">
+          <entries>
+            <entry library-id="4efbe3ac-398c-495f-a8cc-a5c5d40e7bb4">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="c1104728-b3c7-4f96-923d-2b368c77ae51">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex SDK 4.6.0.23201B" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-static-link-runtime-shared-libraries=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
       </configuration>
-    </facet>
-    <facet type="flex" name="Fireball Debug">
-      <configuration flex_sdk="Flex SDK 4.5.1.21328 AIR AIR Mobile">
-        <option name="DO_BUILD" value="true" />
-        <option name="OUTPUT_TYPE" value="Application" />
-        <option name="USE_DEFAULT_SDK_CONFIG_FILE" value="true" />
-        <option name="USE_CUSTOM_CONFIG_FILE" value="false" />
-        <option name="CUSTOM_CONFIG_FILE" value="" />
-        <option name="USE_CUSTOM_CONFIG_FILE_FOR_TESTS" value="false" />
-        <option name="CUSTOM_CONFIG_FILE_FOR_TESTS" value="" />
-        <option name="APPLICATION_ENTRY_POINT" value="" />
-        <option name="MAIN_CLASS" value="examples.fireball.Main" />
-        <option name="OUTPUT_FILE_NAME" value="fireball.swf" />
-        <option name="USE_FACET_COMPILE_OUTPUT_PATH" value="true" />
-        <option name="FACET_COMPILE_OUTPUT_PATH" value="$MODULE_DIR$/../bin" />
-        <option name="FACET_COMPILE_OUTPUT_PATH_FOR_TESTS" value="" />
-        <option name="INCLUDE_RESOURCE_FILES_IN_SWC" value="false" />
-        <option name="TARGET_PLAYER_VERSION" value="11.0.0" />
-        <option name="STATIC_LINK_RUNTIME_SHARED_LIBRARIES" value="true" />
-        <option name="USE_LOCALE_SETTINGS" value="false" />
-        <option name="LOCALE" value="en_US" />
-        <option name="ADDITIONAL_COMPILER_OPTIONS" value="-swf-version=13 -static-link-runtime-shared-libraries=true" />
-        <option name="PATH_TO_SERVICES_CONFIG_XML" value="" />
-        <option name="CONTEXT_ROOT" value="" />
-        <option name="VERSION" value="3" />
-        <NAMESPACE_AND_MANIFEST_FILE_INFO_LIST />
-        <CONDITIONAL_COMPILATION_DEFINITION_LIST />
-        <CSS_FILES_LIST />
+      <configuration name="Fireball Debug" target-platform="Mobile" pure-as="true" main-class="examples.fireball.Main" output-file="fireball.swf" output-folder="$MODULE_DIR$/../bin">
+        <dependencies>
+          <entries>
+            <entry library-id="80b974f2-862b-4a0c-80a2-5d697da7b974">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="b836daf7-802a-46f9-84ad-6de7d01664eb">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex SDK 4.6.0.23201B" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-static-link-runtime-shared-libraries=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/../bin/fireball-android-descriptor.xml" package-file-name="fireball" />
+        <packaging-ios package-file-name="fireball" />
       </configuration>
-    </facet>
+    </configurations>
+    <compiler-options />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../bin" />
@@ -70,10 +53,10 @@
       <sourceFolder url="file://$MODULE_DIR$/../lib/imotion" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../lib/tonfall" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library>
+      <library type="flex">
+        <properties id="80b974f2-862b-4a0c-80a2-5d697da7b974" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../lib/assets.swc!/" />
         </CLASSES>
@@ -82,7 +65,8 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library>
+      <library type="flex">
+        <properties id="b836daf7-802a-46f9-84ad-6de7d01664eb" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../lib/greensock_11_66.swc!/" />
         </CLASSES>
@@ -90,73 +74,25 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="jdk" jdkName="Flex SDK 4.6.0.23201B" jdkType="Flex SDK Type (new)" />
     <orderEntry type="module-library">
-      <library name="AUTOGENERATED library equal to Flex SDK Flex SDK 4.5.1.21328 AIR AIR Mobile">
+      <library type="flex">
+        <properties id="4efbe3ac-398c-495f-a8cc-a5c5d40e7bb4" />
         <CLASSES>
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/air/airglobal.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/advancedgrids.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/authoringsupport.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/charts.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/core.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/flash-integration.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/framework.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/osmf.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/rpc.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/spark.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/sparkskins.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/spark_dmv.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/textLayout.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/mobile/mobilecomponents.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/libs/air/servicemonitor.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/advancedgrids_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/airframework_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/airspark_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/automation_agent_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/automation_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/charts_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/flash-integration_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/framework_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/mobilecomponents_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/mx_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/osmf_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/playerglobal_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/qtp_air_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/rpc_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/spark_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/locale/en_US/textLayout_rb.swc!/" />
-          <root url="jar://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/themes/Mobile/mobile.swc!/" />
+          <root url="jar://$MODULE_DIR$/../lib/assets.swc!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/advancedgrids/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/air/ApplicationUpdater/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/air/Core/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/air/Licensing/Android/AndroidLicensingJavaProject/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/air/Licensing/Android/AndroidLicensingLib/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/airframework/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/airspark/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/authoringsupport/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation_air/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation_airspark/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation_dmv/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation_flashflexkit/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/automation_spark/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/charts/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/core/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/flash-integration/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/framework/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/mobilecomponents/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/mobiletheme/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/mx/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/osmf/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/rpc/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/spark/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/sparkskins/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/spark_dmv/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/textLayout/src" />
-          <root url="file://D:/Apps_NoInstall/Flex SDK 4.5.1.21328 AIR/frameworks/projects/wireframe/src" />
-        </SOURCES>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="c1104728-b3c7-4f96-923d-2b368c77ae51" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/greensock_11_66.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

@@ -26,7 +26,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Research.Kinect.Nui;
+using Microsoft.Kinect;
 using Newtonsoft.Json;
 using UsMedia.KinSence.Modules;
 using UsMedia.KinSence.Messages;
@@ -45,33 +45,74 @@ namespace UsMedia.KinSence
         // ____________________________________________________________________________________________________
         // PROPERTIES
 
-        KinSenceCore kinectCore;
-        Runtime nui;
-        IKinSenceServer server;
+        /// <summary>
+        /// Width of output drawing
+        /// </summary>
+        private const float RenderWidth = 640.0f;
 
-        Dictionary<JointID, Brush> jointColors = new Dictionary<JointID, Brush>() 
-        { 
-            {JointID.HipCenter, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
-            {JointID.Spine, new SolidColorBrush(Color.FromRgb(169, 176, 155))},
-            {JointID.ShoulderCenter, new SolidColorBrush(Color.FromRgb(168, 230, 29))},
-            {JointID.Head, new SolidColorBrush(Color.FromRgb(200, 0,   0))},
-            {JointID.ShoulderLeft, new SolidColorBrush(Color.FromRgb(79,  84,  33))},
-            {JointID.ElbowLeft, new SolidColorBrush(Color.FromRgb(84,  33,  42))},
-            {JointID.WristLeft, new SolidColorBrush(Color.FromRgb(255, 126, 0))},
-            {JointID.HandLeft, new SolidColorBrush(Color.FromRgb(215,  86, 0))},
-            {JointID.ShoulderRight, new SolidColorBrush(Color.FromRgb(33,  79,  84))},
-            {JointID.ElbowRight, new SolidColorBrush(Color.FromRgb(33,  33,  84))},
-            {JointID.WristRight, new SolidColorBrush(Color.FromRgb(77,  109, 243))},
-            {JointID.HandRight, new SolidColorBrush(Color.FromRgb(37,   69, 243))},
-            {JointID.HipLeft, new SolidColorBrush(Color.FromRgb(77,  109, 243))},
-            {JointID.KneeLeft, new SolidColorBrush(Color.FromRgb(69,  33,  84))},
-            {JointID.AnkleLeft, new SolidColorBrush(Color.FromRgb(229, 170, 122))},
-            {JointID.FootLeft, new SolidColorBrush(Color.FromRgb(255, 126, 0))},
-            {JointID.HipRight, new SolidColorBrush(Color.FromRgb(181, 165, 213))},
-            {JointID.KneeRight, new SolidColorBrush(Color.FromRgb(71, 222,  76))},
-            {JointID.AnkleRight, new SolidColorBrush(Color.FromRgb(245, 228, 156))},
-            {JointID.FootRight, new SolidColorBrush(Color.FromRgb(77,  109, 243))}
-        };
+        /// <summary>
+        /// Height of our output drawing
+        /// </summary>
+        private const float RenderHeight = 480.0f;
+
+        /// <summary>
+        /// Thickness of drawn joint lines
+        /// </summary>
+        private const double JointThickness = 3;
+
+        /// <summary>
+        /// Thickness of body center ellipse
+        /// </summary>
+        private const double BodyCenterThickness = 10;
+
+        /// <summary>
+        /// Thickness of clip edge rectangles
+        /// </summary>
+        private const double ClipBoundsThickness = 10;
+
+        /// <summary>
+        /// Brush used to draw skeleton center point
+        /// </summary>
+        private readonly Brush centerPointBrush = Brushes.Blue;
+
+        /// <summary>
+        /// Brush used for drawing joints that are currently tracked
+        /// </summary>
+        private readonly Brush trackedJointBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
+
+        /// <summary>
+        /// Brush used for drawing joints that are currently inferred
+        /// </summary>        
+        private readonly Brush inferredJointBrush = Brushes.Yellow;
+
+        /// <summary>
+        /// Pen used for drawing bones that are currently tracked
+        /// </summary>
+        private readonly Pen trackedBonePen = new Pen(Brushes.Green, 6);
+
+        /// <summary>
+        /// Pen used for drawing bones that are currently inferred
+        /// </summary>        
+        private readonly Pen inferredBonePen = new Pen(Brushes.Gray, 1);
+
+        /// <summary>
+        /// Drawing group for skeleton rendering output
+        /// </summary>
+        private DrawingGroup drawingGroup;
+
+        /// <summary>
+        /// Drawing image that we will display
+        /// </summary>
+        private DrawingImage imageSource;
+
+        private ColorImageFormat lastImageFormat = ColorImageFormat.Undefined;
+        private byte[] rawPixelData;
+        private byte[] pixelData;
+        private WriteableBitmap outputImage;
+
+        KinSenceCore kinectCore;
+        KinectSensor sensor;
+        IKinSenceServer server;
 
         // ____________________________________________________________________________________________________
         // CONSTRUCTOR
@@ -93,86 +134,171 @@ namespace UsMedia.KinSence
         {
             kinectCore = new KinSenceCore();
 
-            nui = kinectCore.Nui;
+            sensor = kinectCore.Sensor;
 
             server = kinectCore.Server;
             server.StateChanged += new EventHandler<StateChangedEventArgs>( server_StateChanged );
 
             tfVersion.Content = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            // Create the drawing group we'll use for drawing
+            this.drawingGroup = new DrawingGroup();
+
+            // Create an image source that we can use in our image control
+            this.imageSource = new DrawingImage(this.drawingGroup);
+
+            // Display the drawing using our image control
+            SkeletonImage.Source = this.imageSource;
         }
 
-
-        private Point GetDisplayPosition( Joint joint )
+        /// <summary>
+        /// Draws a skeleton's bones and joints
+        /// </summary>
+        /// <param name="skeleton">skeleton to draw</param>
+        /// <param name="drawingContext">drawing context to draw to</param>
+        private void DrawBonesAndJoints(Skeleton skeleton, DrawingContext drawingContext)
         {
-            float depthX, depthY;
-            nui.SkeletonEngine.SkeletonToDepthImage( joint.Position, out depthX, out depthY );
-            depthX = depthX * 320; //convert to 320, 240 space
-            depthY = depthY * 240; //convert to 320, 240 space
-            int colorX, colorY;
-            ImageViewArea iv = new ImageViewArea();
+            // Render Torso
+            this.DrawBone(skeleton, drawingContext, JointType.Head, JointType.ShoulderCenter);
+            this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderRight);
+            this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.Spine);
+            this.DrawBone(skeleton, drawingContext, JointType.Spine, JointType.HipCenter);
+            this.DrawBone(skeleton, drawingContext, JointType.HipCenter, JointType.HipLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.HipCenter, JointType.HipRight);
 
-            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel( ImageResolution.Resolution640x480, iv, (int) depthX, (int) depthY, (short) 0, out colorX, out colorY );
+            // Left Arm
+            this.DrawBone(skeleton, drawingContext, JointType.ShoulderLeft, JointType.ElbowLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.ElbowLeft, JointType.WristLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.WristLeft, JointType.HandLeft);
 
-            return new Point( (int) ( skeleton.Width * colorX / 640.0 ), (int) ( skeleton.Height * colorY / 480 ) );
-        }
+            // Right Arm
+            this.DrawBone(skeleton, drawingContext, JointType.ShoulderRight, JointType.ElbowRight);
+            this.DrawBone(skeleton, drawingContext, JointType.ElbowRight, JointType.WristRight);
+            this.DrawBone(skeleton, drawingContext, JointType.WristRight, JointType.HandRight);
 
+            // Left Leg
+            this.DrawBone(skeleton, drawingContext, JointType.HipLeft, JointType.KneeLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.KneeLeft, JointType.AnkleLeft);
+            this.DrawBone(skeleton, drawingContext, JointType.AnkleLeft, JointType.FootLeft);
 
-        private Polyline GetBodySegment( JointsCollection joints, Brush brush, params JointID[] ids )
-        {
-            PointCollection points = new PointCollection( ids.Length );
-            for ( int i = 0; i < ids.Length; ++i )
+            // Right Leg
+            this.DrawBone(skeleton, drawingContext, JointType.HipRight, JointType.KneeRight);
+            this.DrawBone(skeleton, drawingContext, JointType.KneeRight, JointType.AnkleRight);
+            this.DrawBone(skeleton, drawingContext, JointType.AnkleRight, JointType.FootRight);
+
+            // Render Joints
+            foreach (Joint joint in skeleton.Joints)
             {
-                points.Add( GetDisplayPosition( joints[ ids[ i ] ] ) );
-            }
+                Brush drawBrush = null;
 
-            Polyline polyline = new Polyline();
-            polyline.Points = points;
-            polyline.Stroke = brush;
-            polyline.StrokeThickness = 5;
-            return polyline;
-        }
-
-
-        private void DrawSkeletons( SkeletonFrame skeletonFrame )
-        {
-            int iSkeleton = 0;
-            Brush[] brushes = new Brush[ 6 ];
-            brushes[ 0 ] = new SolidColorBrush( Color.FromRgb( 255, 0, 0 ) );
-            brushes[ 1 ] = new SolidColorBrush( Color.FromRgb( 0, 255, 0 ) );
-            brushes[ 2 ] = new SolidColorBrush( Color.FromRgb( 64, 255, 255 ) );
-            brushes[ 3 ] = new SolidColorBrush( Color.FromRgb( 255, 255, 64 ) );
-            brushes[ 4 ] = new SolidColorBrush( Color.FromRgb( 255, 64, 255 ) );
-            brushes[ 5 ] = new SolidColorBrush( Color.FromRgb( 128, 128, 255 ) );
-
-            skeleton.Children.Clear();
-            foreach ( SkeletonData data in skeletonFrame.Skeletons )
-            {
-                if ( SkeletonTrackingState.Tracked == data.TrackingState )
+                if (joint.TrackingState == JointTrackingState.Tracked)
                 {
-                    // Draw bones
-                    Brush brush = brushes[ iSkeleton % brushes.Length ];
-                    skeleton.Children.Add( GetBodySegment( data.Joints, brush, JointID.HipCenter, JointID.Spine, JointID.ShoulderCenter, JointID.Head ) );
-                    skeleton.Children.Add( GetBodySegment( data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderLeft, JointID.ElbowLeft, JointID.WristLeft, JointID.HandLeft ) );
-                    skeleton.Children.Add( GetBodySegment( data.Joints, brush, JointID.ShoulderCenter, JointID.ShoulderRight, JointID.ElbowRight, JointID.WristRight, JointID.HandRight ) );
-                    skeleton.Children.Add( GetBodySegment( data.Joints, brush, JointID.HipCenter, JointID.HipLeft, JointID.KneeLeft, JointID.AnkleLeft, JointID.FootLeft ) );
-                    skeleton.Children.Add( GetBodySegment( data.Joints, brush, JointID.HipCenter, JointID.HipRight, JointID.KneeRight, JointID.AnkleRight, JointID.FootRight ) );
-
-                    // Draw joints
-                    foreach ( Joint joint in data.Joints )
-                    {
-                        Point jointPos = GetDisplayPosition( joint );
-                        Line jointLine = new Line();
-                        jointLine.X1 = jointPos.X - 3;
-                        jointLine.X2 = jointLine.X1 + 6;
-                        jointLine.Y1 = jointLine.Y2 = jointPos.Y;
-                        jointLine.Stroke = jointColors[ joint.ID ];
-                        jointLine.StrokeThickness = 6;
-                        skeleton.Children.Add( jointLine );
-                    }
+                    drawBrush = this.trackedJointBrush;
+                }
+                else if (joint.TrackingState == JointTrackingState.Inferred)
+                {
+                    drawBrush = this.inferredJointBrush;
                 }
 
-                iSkeleton++;
-            } // for each skeleton
+                if (drawBrush != null)
+                {
+                    drawingContext.DrawEllipse(drawBrush, null, this.SkeletonPointToScreen(joint.Position), JointThickness, JointThickness);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Maps a SkeletonPoint to lie within our render space and converts to Point
+        /// </summary>
+        /// <param name="skelpoint">point to map</param>
+        /// <returns>mapped point</returns>
+        private Point SkeletonPointToScreen(SkeletonPoint skelpoint)
+        {
+            // Convert point to depth space.  
+            // We are not using depth directly, but we do want the points in our 640x480 output resolution.
+            DepthImagePoint depthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(skelpoint, DepthImageFormat.Resolution640x480Fps30);
+            return new Point(depthPoint.X, depthPoint.Y);
+        }
+
+        /// <summary>
+        /// Draws a bone line between two joints
+        /// </summary>
+        /// <param name="skeleton">skeleton to draw bones from</param>
+        /// <param name="drawingContext">drawing context to draw to</param>
+        /// <param name="jointType0">joint to start drawing from</param>
+        /// <param name="jointType1">joint to end drawing at</param>
+        private void DrawBone(Skeleton skeleton, DrawingContext drawingContext, JointType jointType0, JointType jointType1)
+        {
+            Joint joint0 = skeleton.Joints[jointType0];
+            Joint joint1 = skeleton.Joints[jointType1];
+
+            // If we can't find either of these joints, exit
+            if (joint0.TrackingState == JointTrackingState.NotTracked ||
+                joint1.TrackingState == JointTrackingState.NotTracked)
+            {
+                return;
+            }
+
+            // Don't draw if both points are inferred
+            if (joint0.TrackingState == JointTrackingState.Inferred &&
+                joint1.TrackingState == JointTrackingState.Inferred)
+            {
+                return;
+            }
+
+            // We assume all drawn bones are inferred unless BOTH joints are tracked
+            Pen drawPen = this.inferredBonePen;
+            if (joint0.TrackingState == JointTrackingState.Tracked && joint1.TrackingState == JointTrackingState.Tracked)
+            {
+                drawPen = this.trackedBonePen;
+            }
+
+            drawingContext.DrawLine(drawPen, this.SkeletonPointToScreen(joint0.Position), this.SkeletonPointToScreen(joint1.Position));
+        }
+
+
+        private void ConvertBayerToRgb32(int width, int height)
+        {
+            // Demosaic using a basic nearest-neighbor algorithm, operating on groups of four pixels.
+            for (int y = 0; y < height; y += 2)
+            {
+                for (int x = 0; x < width; x += 2)
+                {
+                    int firstRowOffset = (y * width) + x;
+                    int secondRowOffset = firstRowOffset + width;
+
+                    // Cache the Bayer component values.
+                    byte red = rawPixelData[firstRowOffset + 1];
+                    byte green1 = rawPixelData[firstRowOffset];
+                    byte green2 = rawPixelData[secondRowOffset + 1];
+                    byte blue = rawPixelData[secondRowOffset];
+
+                    // Adjust offsets for RGB.
+                    firstRowOffset *= 4;
+                    secondRowOffset *= 4;
+
+                    // Top left
+                    pixelData[firstRowOffset] = blue;
+                    pixelData[firstRowOffset + 1] = green1;
+                    pixelData[firstRowOffset + 2] = red;
+
+                    // Top right
+                    pixelData[firstRowOffset + 4] = blue;
+                    pixelData[firstRowOffset + 5] = green1;
+                    pixelData[firstRowOffset + 6] = red;
+
+                    // Bottom left
+                    pixelData[secondRowOffset] = blue;
+                    pixelData[secondRowOffset + 1] = green2;
+                    pixelData[secondRowOffset + 2] = red;
+
+                    // Bottom right
+                    pixelData[secondRowOffset + 4] = blue;
+                    pixelData[secondRowOffset + 5] = green2;
+                    pixelData[secondRowOffset + 6] = red;
+                }
+            }
         }
 
         // ____________________________________________________________________________________________________
@@ -196,22 +322,133 @@ namespace UsMedia.KinSence
 
         void Window_Closed( object sender, EventArgs e )
         {
-            nui.Uninitialize();
+            sensor.Stop();
             server.Stop();
             Environment.Exit( 0 );
         }
 
 
-        private void nui_SkeletonFrameReady( object sender, SkeletonFrameReadyEventArgs e )
+        /// <summary>
+        /// Event handler for Kinect sensor's SkeletonFrameReady event
+        /// </summary>
+        /// <param name="sender">object sending the event</param>
+        /// <param name="e">event arguments</param>
+        private void sensor_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
-            DrawSkeletons( e.SkeletonFrame );
+            Skeleton[] skeletons = new Skeleton[0];
+
+            using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
+            {
+                if (skeletonFrame != null)
+                {
+                    skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
+                    skeletonFrame.CopySkeletonDataTo(skeletons);
+                }
+            }
+
+            using (DrawingContext dc = this.drawingGroup.Open())
+            {
+                // Draw a transparent background to set the render size
+                dc.DrawRectangle(Brushes.Black, null, new Rect(0.0, 0.0, RenderWidth, RenderHeight));
+
+                if (skeletons.Length != 0)
+                {
+                    foreach (Skeleton skel in skeletons)
+                    {
+                        if (skel.TrackingState == SkeletonTrackingState.Tracked)
+                        {
+                            this.DrawBonesAndJoints(skel, dc);
+                        }
+                        else if (skel.TrackingState == SkeletonTrackingState.PositionOnly)
+                        {
+                            dc.DrawEllipse(
+                            this.centerPointBrush,
+                            null,
+                            this.SkeletonPointToScreen(skel.Position),
+                            BodyCenterThickness,
+                            BodyCenterThickness);
+                        }
+                    }
+                }
+
+                // prevent drawing outside of our render area
+                this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, RenderWidth, RenderHeight));
+            }
         }
 
 
-        private void nui_ColorFrameReady( object sender, ImageFrameReadyEventArgs e )
+        private void senser_ColorFrameReady(object sender, ColorImageFrameReadyEventArgs e)
         {
-            PlanarImage Image = e.ImageFrame.Image;
-            video.Source = BitmapSource.Create( Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel );
+            using (ColorImageFrame imageFrame = e.OpenColorImageFrame())
+            {
+                if (imageFrame != null)
+                {
+                    // We need to detect if the format has changed.
+                    bool haveNewFormat = this.lastImageFormat != imageFrame.Format;
+                    bool convertToRgb = false;
+                    int bytesPerPixel = imageFrame.BytesPerPixel;
+
+                    if (imageFrame.Format == ColorImageFormat.RawBayerResolution640x480Fps30 ||
+                        imageFrame.Format == ColorImageFormat.RawBayerResolution1280x960Fps12)
+                    {
+                        convertToRgb = true;
+                        bytesPerPixel = 4;
+                    }
+
+                    if (haveNewFormat)
+                    {
+                        if (convertToRgb)
+                        {
+                            this.rawPixelData = new byte[imageFrame.PixelDataLength];
+                            this.pixelData = new byte[bytesPerPixel * imageFrame.Width * imageFrame.Height];
+                        }
+                        else
+                        {
+                            this.pixelData = new byte[imageFrame.PixelDataLength];
+                        }
+                    }
+
+                    if (convertToRgb)
+                    {
+                        imageFrame.CopyPixelDataTo(this.rawPixelData);
+                        ConvertBayerToRgb32(imageFrame.Width, imageFrame.Height);
+                    }
+                    else
+                    {
+                        imageFrame.CopyPixelDataTo(this.pixelData);
+                    }
+
+                    // A WriteableBitmap is a WPF construct that enables resetting the Bits of the image.
+                    // This is more efficient than creating a new Bitmap every frame.
+                    if (haveNewFormat)
+                    {
+                        PixelFormat format = PixelFormats.Bgr32;
+                        if (imageFrame.Format == ColorImageFormat.InfraredResolution640x480Fps30)
+                        {
+                            format = PixelFormats.Gray16;
+                        }
+
+                       ColorImage.Visibility = Visibility.Visible;
+                        this.outputImage = new WriteableBitmap(
+                            imageFrame.Width,
+                            imageFrame.Height,
+                            96,  // DpiX
+                            96,  // DpiY
+                            format,
+                            null);
+
+                        this.ColorImage.Source = this.outputImage;
+                    }
+
+                    this.outputImage.WritePixels(
+                        new Int32Rect(0, 0, imageFrame.Width, imageFrame.Height),
+                        this.pixelData,
+                        imageFrame.Width * bytesPerPixel,
+                        0);
+
+                    this.lastImageFormat = imageFrame.Format;
+                }
+            }
         }
 
 
@@ -276,18 +513,18 @@ namespace UsMedia.KinSence
 
         private void videoStreamsToggle_Checked( object sender, RoutedEventArgs e )
         {
-            nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>( nui_SkeletonFrameReady );
-            nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>( nui_ColorFrameReady );
+            sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(sensor_SkeletonFrameReady);
+            sensor.ColorFrameReady += new EventHandler<ColorImageFrameReadyEventArgs>(senser_ColorFrameReady );
         }
 
 
         private void videoStreamsToggle_Unchecked( object sender, RoutedEventArgs e )
         {
-            nui.SkeletonFrameReady -= nui_SkeletonFrameReady;
-            nui.VideoFrameReady -= nui_ColorFrameReady;
+            sensor.SkeletonFrameReady -= sensor_SkeletonFrameReady;
+            sensor.ColorFrameReady -= senser_ColorFrameReady;
 
-            video.Source = null;
-            skeleton.Children.Clear();
+            ColorImage.Source = null;
+            SkeletonImage.Source = null;
         }
 
     }

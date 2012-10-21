@@ -30,7 +30,7 @@ package nl.usmedia.kinsence.modules.handtracking
 
     import nl.usmedia.kinsence.modules.AbstractKinSenceModule;
     import nl.usmedia.kinsence.modules.handtracking.hands.Hands;
-    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.KinSenceVector;
+    import nl.usmedia.kinsence.modules.skeletontracking.skeleton.SkeletonPoint;
 
 
     /**

@@ -29,7 +29,7 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
     /**
      * @author Pieter van de Sluis
      */
-    public class JointID
+    public class JointType
     {
         // ____________________________________________________________________________________________________
         // PROPERTIES
