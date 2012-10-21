@@ -231,7 +231,7 @@ package examples.db9
             _speechRecognition = new SpeechRecognitionModule();
             _speechRecognition.addEventListener( SpeechRecognitionEvent.SPEECH_RECOGNIZED, speechRecognizedHandler );
             _speechRecognition.addEventListener( KinSenceModuleEvent.REGISTERED, speechRecognitionModuleRegisteredEvent );
-            _kinSence.registerModule( _speechRecognition );
+//            _kinSence.registerModule( _speechRecognition );
 
             _handTracking = new HandTrackingModule();
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );

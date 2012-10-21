@@ -58,9 +58,6 @@ package nl.usmedia.kinsence.modules.skeletontracking.skeleton
 
             frameNumber = object.FrameNumber;
 
-            normalToGravity = new SkeletonPoint();
-            normalToGravity.fromObject( object.NormalToGravity );
-
             skeletons = new Vector.<Skeleton>();
             for each ( var skeletonObject:Object in object.Skeletons )
             {
