@@ -32,7 +32,7 @@
 <application xmlns="http://ns.adobe.com/air/application/3.1">
   <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-  <id>examples.fireball.Main</id>
+  <id>kinsence.fireball</id>
   <!-- Used as the filename for the application. Required. -->
   <filename>Fireball</filename>
   <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
@@ -92,7 +92,7 @@
     <!-- Whether the app launches in full screen. Optional. Mobile only. Default false -->
     <fullScreen>true</fullScreen>
     <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
-    <!--<renderMode></renderMode>-->
+    <renderMode>direct</renderMode>
     <!-- Whether the default direct mode rendering context allocates storage for depth and stencil buffers.  Optional.  Default false. -->
     <!--<depthAndStencil></depthAndStencil>-->
     <!-- Whether or not to pan when a soft keyboard is raised or lowered (either "pan" or "none").  Optional.  Defaults "pan." -->
