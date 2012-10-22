@@ -45,6 +45,7 @@ package examples.fireball
     import flash.geom.Rectangle;
     import flash.media.Sound;
     import flash.text.TextField;
+    import flash.utils.getTimer;
 
     import nl.imotion.utils.fpsmeter.FPSMeter;
 
@@ -96,9 +97,11 @@ package examples.fireball
         private var _cloudsOffset1:Number = 0;
         private var _cloudsOffset2:Number = 0;
 
-        [Embed("../../../assets/Flashbang-Kibblesbob-899170896.mp3")]
-        private var BoltCastSound:Class;
+        private var _lastFireTime:Number;
+        private var _rechargeDelay:Number = 3000;
 
+        [Embed("../../../assets/whizz.mp3")]
+        private var BoltCastSound:Class;
 
         private var _boltCastSound:Sound;
 
@@ -181,12 +184,12 @@ package examples.fireball
             _clouds2.height = stage.stageHeight;
             this.addChild( _clouds2 );
 
-            fpsText = new TextField();
-            fpsText.textColor = 0xffffff;
-            this.addChild(fpsText);
+//            fpsText = new TextField();
+//            fpsText.textColor = 0xffffff;
+//            this.addChild(fpsText);
 
-            _fpsMeter = new FPSMeter();
-            _fpsMeter.startMeasure(false);
+//            _fpsMeter = new FPSMeter();
+//            _fpsMeter.startMeasure(false);
 
             _boltCastSound = new BoltCastSound() as Sound;
 
@@ -263,52 +266,20 @@ package examples.fireball
             }
         }
 
-        // ____________________________________________________________________________________________________
-        // PROTECTED
-
-
-
-        // ____________________________________________________________________________________________________
-        // GETTERS / SETTERS
-
-
-        // ____________________________________________________________________________________________________
-        // EVENT HANDLERS
-
-        private function handTrackingUpdateHandler( e:HandTrackingEvent ):void
-        {
-            if ( e.handSets.length > 0 )
-            {
-                var handSet:Hands = e.handSets[ 0 ];
-
-                if ( handSet.left.ratioZ > 0.8 || handSet.right.ratioZ > 0.8 )
-                {
-                    _intensityTarget = 0;
-
-                    if ( _intensity > 0.9 )
-                    {
-                        fire();
-                    }
-                }
-                else
-                {
-                    _intensityTarget = _bounds.getRelativePosFromValue( handSet.distanceRatio );
-                }
-            }
-        }
-
 
         private function fire():void
         {
             _intensity = 0;
             _boltCastSound.play();
+
+            _lastFireTime = getTimer();
         }
 
 
-        private function enterFrameHandler( e:Event ):void
+        private function update():void
         {
-            fpsText.text = _fpsMeter.fps.toString();
-            
+//            fpsText.text = _fpsMeter.fps.toString();
+
             _intensity += ( _intensityTarget - _intensity ) / 15;
 
             _clouds1.alpha = _intensity;
@@ -339,6 +310,49 @@ package examples.fireball
             {
                 bitmapData.copyChannel( _noiseMap, new Rectangle(0, 0, _cloudWidth, wrapAmount ), new Point( 0, _cloudHeight - wrapAmount ), BitmapDataChannel.BLUE, BitmapDataChannel.ALPHA );
             }
+        }
+
+        // ____________________________________________________________________________________________________
+        // PROTECTED
+
+
+
+        // ____________________________________________________________________________________________________
+        // GETTERS / SETTERS
+
+
+        // ____________________________________________________________________________________________________
+        // EVENT HANDLERS
+
+        private function handTrackingUpdateHandler( e:HandTrackingEvent ):void
+        {
+            if ( e.handSets.length > 0 )
+            {
+                var handSet:Hands = e.handSets[ 0 ];
+
+                if ( handSet.left.ratioZ > 0.8 || handSet.right.ratioZ > 0.8 )
+                {
+                    if ( _intensity > 0.9 )
+                    {
+                        fire();
+                    }
+
+                    _intensityTarget = 0;
+                }
+                else
+                {
+                    if ( isNaN( _lastFireTime ) || ( getTimer() - _lastFireTime ) > _rechargeDelay )
+                    {
+                        _intensityTarget = _bounds.getRelativePosFromValue( handSet.distanceRatio );
+                    }
+                }
+            }
+        }
+
+
+        private function enterFrameHandler( e:Event ):void
+        {
+            update();
         }
 
     }
