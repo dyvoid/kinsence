@@ -50,10 +50,8 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
 
         public static readonly string NAME = "SpeechRecognition";
 
-        private const string RecognizerId = "SR_MS_en-US_Kinect_10.0";
-
-        private KinectAudioSource kinectSource;
-        private SpeechRecognitionEngine sre;
+        private KinectSensor sensor;
+        private SpeechRecognitionEngine speechEngine;
 
         private bool isActive = false;
 
@@ -79,19 +77,51 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
         public override void OnRegister()
         {
             base.OnRegister();
+            
+            // Look through all sensors and start the first connected one.
+            // This requires that a Kinect is connected at the time of app startup.
+            // To make your app robust against plug/unplug, 
+            // it is recommended to use KinectSensorChooser provided in Microsoft.Kinect.Toolkit
+            foreach (var potentialSensor in KinectSensor.KinectSensors)
+            {
+                if (potentialSensor.Status == KinectStatus.Connected)
+                {
+                    this.sensor = potentialSensor;
+                    break;
+                }
+            }
 
-            RecognizerInfo ri = SpeechRecognitionEngine.InstalledRecognizers().Where( r => r.Id == RecognizerId ).FirstOrDefault();
-            if ( ri == null )
+            if (null != this.sensor)
+            {
+                try
+                {
+                    // Start the sensor!
+                    this.sensor.Start();
+                }
+                catch (IOException)
+                {
+                    // Some other application is streaming from the same Kinect sensor
+                    this.sensor = null;
+                }
+            }
+
+            if (this.sensor == null)
+            {
+                
                 return;
+            }
 
-            recognizerCulture = ri.Culture;
+            RecognizerInfo ri = GetKinectRecognizer();
 
-            sre = new SpeechRecognitionEngine( ri.Id );
+            if (ri != null)
+            {
+                this.speechEngine = new SpeechRecognitionEngine(ri.Id);
+            }
 
-            sre.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>( sre_SpeechDetected );
-            sre.SpeechHypothesized += new EventHandler<SpeechHypothesizedEventArgs>( sre_SpeechHypothesized );
-            sre.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>( sre_SpeechRecognized );
-            sre.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>( sre_SpeechRecognitionRejected );
+            speechEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(sre_SpeechDetected);
+            speechEngine.SpeechHypothesized += new EventHandler<SpeechHypothesizedEventArgs>(sre_SpeechHypothesized);
+            speechEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized);
+            speechEngine.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>(sre_SpeechRecognitionRejected);
 
             Start();
         }
@@ -101,10 +131,10 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
         {
             base.OnRemove();
 
-            sre.SpeechDetected -= sre_SpeechDetected;
-            sre.SpeechHypothesized -= sre_SpeechHypothesized;
-            sre.SpeechRecognized -= sre_SpeechRecognized;
-            sre.SpeechRecognitionRejected -= sre_SpeechRecognitionRejected;
+            speechEngine.SpeechDetected -= sre_SpeechDetected;
+            speechEngine.SpeechHypothesized -= sre_SpeechHypothesized;
+            speechEngine.SpeechRecognized -= sre_SpeechRecognized;
+            speechEngine.SpeechRecognitionRejected -= sre_SpeechRecognitionRejected;
 
             Stop();
         }
@@ -112,17 +142,18 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
 
         public virtual void Start()
         {
-            var t = new Thread( InitEngine );
-            t.Start();
+            //var t = new Thread( InitEngine );
+            //t.Start();
+            InitEngine();
         }
 
 
         public virtual void Stop()
         {
-            if ( sre != null )
+            if ( speechEngine != null )
             {
-                sre.RecognizeAsyncCancel();
-                sre.RecognizeAsyncStop();
+                speechEngine.RecognizeAsyncCancel();
+                speechEngine.RecognizeAsyncStop();
             }
         }
 
@@ -187,55 +218,26 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
         // ____________________________________________________________________________________________________
         // PRIVATE
 
-        protected virtual void Activate()
+        /// <summary>
+        /// Gets the metadata for the speech recognizer (acoustic model) most suitable to
+        /// process audio from Kinect device.
+        /// </summary>
+        /// <returns>
+        /// RecognizerInfo if found, <code>null</code> otherwise.
+        /// </returns>
+        private static RecognizerInfo GetKinectRecognizer()
         {
-            if ( isActive )
-                return;
-
-            sre.UnloadAllGrammars();
-
-            Choices choices = new Choices();
-            foreach ( String phrase in phrases )
+            foreach (RecognizerInfo recognizer in SpeechRecognitionEngine.InstalledRecognizers())
             {
-                choices.Add( phrase );
-            }
-            
-            if ( deactivationPhrase != null )
-            {
-                choices.Add( deactivationPhrase );
+                string value;
+                recognizer.AdditionalInfo.TryGetValue("Kinect", out value);
+                if ("True".Equals(value, StringComparison.OrdinalIgnoreCase) && "en-US".Equals(recognizer.Culture.Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return recognizer;
+                }
             }
 
-            var gb = new GrammarBuilder();
-            gb.Culture = recognizerCulture;
-            gb.Append( choices );
-
-            sre.LoadGrammar( new Grammar( gb ) );
-
-            isActive = true;
-
-            SendMessage( "Activated", null );
-        }
-
-
-        protected virtual void Deactivate()
-        {
-            if ( !isActive )
-                return;
-
-            sre.UnloadAllGrammars();
-
-            if ( activationPhrase != null )
-            {
-                var gb = new GrammarBuilder();
-                gb.Culture = recognizerCulture;
-                gb.Append( activationPhrase );
-
-                sre.LoadGrammar( new Grammar( gb ) );
-            }
-
-            isActive = false;
-
-            SendMessage( "Deactivated", null );
+            return null;
         }
 
         // ____________________________________________________________________________________________________
@@ -243,19 +245,19 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
 
         protected virtual void InitEngine()
         {
-            kinectSource = new KinectAudioSource();
+            KinectAudioSource kinectSource = sensor.AudioSource;
             kinectSource.EchoCancellationMode = EchoCancellationMode.None;
             kinectSource.AutomaticGainControlEnabled = false;
             var kinectStream = kinectSource.Start();
-            sre.SetInputToAudioStream( kinectStream, new SpeechAudioFormatInfo(
+            speechEngine.SetInputToAudioStream(kinectStream, new SpeechAudioFormatInfo(
                                                   EncodingFormat.Pcm, 16000, 16, 1,
                                                   32000, 2, null ) );
             var gb = new GrammarBuilder();
-            gb.Culture = recognizerCulture;
+            //gb.Culture = recognizerCulture;
             gb.Append( "Dummy" );
-            sre.LoadGrammar( new Grammar( gb ) );
-            sre.RecognizeAsync( RecognizeMode.Multiple );
-            sre.UnloadAllGrammars();
+            speechEngine.LoadGrammar(new Grammar(gb));
+            speechEngine.RecognizeAsync(RecognizeMode.Multiple);
+            speechEngine.UnloadAllGrammars();
         }
 
 
@@ -266,6 +268,59 @@ namespace UsMedia.KinSence.Modules.SpeechRecognition
             result.Confidence = confidence;
 
             base.SendMessage( type, result );
+        }
+
+        protected virtual void Activate()
+        {
+            if (isActive)
+                return;
+
+            speechEngine.UnloadAllGrammars();
+
+            Choices choices = new Choices();
+            foreach (String phrase in phrases)
+            {
+                choices.Add(phrase);
+            }
+
+            if (deactivationPhrase != null)
+            {
+                choices.Add(deactivationPhrase);
+            }
+
+            //recognizerCulture = new CultureInfo("en_GB");
+
+            var gb = new GrammarBuilder();
+            //gb.Culture = recognizerCulture;
+            gb.Append(choices);
+
+            speechEngine.LoadGrammar(new Grammar(gb));
+
+            isActive = true;
+
+            SendMessage("Activated", null);
+        }
+
+
+        protected virtual void Deactivate()
+        {
+            if (!isActive)
+                return;
+
+            speechEngine.UnloadAllGrammars();
+
+            if (activationPhrase != null)
+            {
+                var gb = new GrammarBuilder();
+                //gb.Culture = recognizerCulture;
+                gb.Append(activationPhrase);
+
+                speechEngine.LoadGrammar(new Grammar(gb));
+            }
+
+            isActive = false;
+
+            SendMessage("Deactivated", null);
         }
 
         // ____________________________________________________________________________________________________

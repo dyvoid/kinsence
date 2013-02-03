@@ -45,7 +45,7 @@
                 </Ellipse>
             </Canvas>
             <Label Content="IP Address" Height="28" Foreground="Black" />
-            <TextBox Height="23" Name="inIPAddress" Width="96" Text="192.128.1.6" MaxLength="15" />
+            <TextBox Height="23" Name="inIPAddress" Width="96" Text="192.168.1.6" MaxLength="15" TextChanged="inIPAddress_TextChanged" />
             <Label Content="Port" Height="28" Foreground="Black" />
             <TextBox Height="23" Name="inPort" Text="3000" Width="47" MaxLength="5" />
             <Button Content="Start" Height="23" Name="startButton" Width="75" Margin="10 0 0 0" Click="startButton_Click" />

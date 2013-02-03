@@ -21,7 +21,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="Fireball Debug" target-platform="Mobile" pure-as="true" main-class="examples.fireball.Main" output-file="fireball.swf" output-folder="$MODULE_DIR$/../bin">
+      <configuration name="Fireball Debug" target-platform="Mobile" pure-as="true" main-class="examples.fireball.Main" output-file="fireball_debug.swf" output-folder="$MODULE_DIR$/../bin">
         <dependencies>
           <entries>
             <entry library-id="80b974f2-862b-4a0c-80a2-5d697da7b974">
@@ -34,11 +34,55 @@
           <sdk name="Flex SDK 4.6.0.23201B" />
         </dependencies>
         <compiler-options>
+          <option name="additionalOptions" value="-swf-version=13 -static-link-runtime-shared-libraries=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/../bin/fireball-android-descriptor-debug.xml" package-file-name="fireball" />
+        <packaging-ios package-file-name="fireball" />
+      </configuration>
+      <configuration name="Fireball Release" target-platform="Mobile" pure-as="true" main-class="examples.fireball.Main" output-file="fireball.swf" output-folder="$MODULE_DIR$/../bin">
+        <dependencies>
+          <entries>
+            <entry library-id="16773c72-693b-4db3-afc4-f51dc2e496c5">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="e0bd7d80-f28f-41a1-9d0b-9aca49af380c">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex SDK 4.6.0.23201B" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.debug.swf" value="false" />
+          </map>
+          <option name="additionalOptions" value="-swf-version=13 -static-link-runtime-shared-libraries=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/../bin/fireball-android-descriptor-release.xml" package-file-name="Fireball_Release" />
+        <packaging-ios package-file-name="Fireball_Release" />
+      </configuration>
+      <configuration name="DB9" pure-as="true" main-class="examples.db9.Main" output-file="db9.swf" output-folder="$MODULE_DIR$/../bin">
+        <dependencies target-player="11.1">
+          <entries>
+            <entry library-id="6582d7f7-21dc-4d61-b588-d815bb661a8e">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="c87159eb-677e-4791-9803-187d0060cf42">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex SDK 4.6.0.23201B" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.debug.swf" value="false" />
+          </map>
           <option name="additionalOptions" value="-static-link-runtime-shared-libraries=true" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/../bin/fireball-android-descriptor.xml" package-file-name="fireball" />
-        <packaging-ios package-file-name="fireball" />
+        <packaging-android />
+        <packaging-ios />
       </configuration>
     </configurations>
     <compiler-options />
@@ -88,6 +132,46 @@
     <orderEntry type="module-library">
       <library type="flex">
         <properties id="c1104728-b3c7-4f96-923d-2b368c77ae51" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/greensock_11_66.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="16773c72-693b-4db3-afc4-f51dc2e496c5" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/assets.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="e0bd7d80-f28f-41a1-9d0b-9aca49af380c" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/greensock_11_66.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="6582d7f7-21dc-4d61-b588-d815bb661a8e" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/assets.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="flex">
+        <properties id="c87159eb-677e-4791-9803-187d0060cf42" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../lib/greensock_11_66.swc!/" />
         </CLASSES>

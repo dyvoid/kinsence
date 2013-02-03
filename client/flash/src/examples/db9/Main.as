@@ -139,6 +139,12 @@ package examples.db9
         private var _light3:PointLight;
 
         private var _tts:TextToSpeech = new TextToSpeech();
+
+        private var _mainObject:Loader3D;
+        private var _skyBoxCubeMap:CubeMap;
+        private var _skybox:SkyBox;
+        private var _skyboxSide:BitmapData;
+        private var _skyboxTopBottom:BitmapData;
         private var _skyLight:DirectionalLight;
 
         private var _localDir:String;
@@ -199,8 +205,8 @@ package examples.db9
             _rightHandTracker.graphics.endFill();
 
 //            this.addChild( _headTracker );
-            this.addChild( _leftHandTracker );
-            this.addChild( _rightHandTracker );
+//            this.addChild( _leftHandTracker );
+//            this.addChild( _rightHandTracker );
         }
 
 
@@ -231,7 +237,7 @@ package examples.db9
             _speechRecognition = new SpeechRecognitionModule();
             _speechRecognition.addEventListener( SpeechRecognitionEvent.SPEECH_RECOGNIZED, speechRecognizedHandler );
             _speechRecognition.addEventListener( KinSenceModuleEvent.REGISTERED, speechRecognitionModuleRegisteredEvent );
-//            _kinSence.registerModule( _speechRecognition );
+            _kinSence.registerModule( _speechRecognition );
 
             _handTracking = new HandTrackingModule();
             _handTracking.addEventListener( HandTrackingEvent.HAND_TRACKING_UPDATE, handTrackingUpdateHandler );
@@ -288,21 +294,6 @@ package examples.db9
             _skyLight.lookAt(new Vector3D());
             _view.scene.addChild(_skyLight);
         }
-
-
-        private var _mainObject:Loader3D;
-
-
-        private var _skyBoxCubeMap:CubeMap;
-
-
-        private var _skybox:SkyBox;
-
-
-        private var _skyboxSide:BitmapData;
-
-
-        private var _skyboxTopBottom:BitmapData;
 
 
         private function initObjects():void
@@ -414,10 +405,9 @@ package examples.db9
 
         private function connectSuccessHandler( event:Event ):void
         {
-            _kinSence.setElevationAngle( 10 );
             _kinSence.setTransformSmoothParameters( new TransformSmoothParameters( 0.3, 1, 0.5, 0.4, 0.5 ) );
 
-            _tts.say( "connected to server" );
+//            _tts.say( "connected to server" );
         }
 
 
@@ -547,6 +537,7 @@ package examples.db9
                         return;
                 }
 
+                _tts.say( "setting the color to " + e.result.text.substr( 6 ) );
                 TweenMax.to( _bodyMat, 2, { hexColors: { color: color }, ease: Quint.easeInOut } );
             }
         }
@@ -578,9 +569,9 @@ package examples.db9
 
                 if ( leftHand.ratioY < 0.7 && leftHand.ratioZ > 0.5 )
                 {
-                    /*var brightness:Number = 1 - leftHand.ratioY + 0.5;
+                    var brightness:Number = 1 - leftHand.ratioY + 0.5;
 
-                    updateLighting( brightness );*/
+                    updateLighting( brightness );
                 }
             }
         }
@@ -588,12 +579,9 @@ package examples.db9
 
         private function updateLighting( brightness:Number ):void
         {
-            var newSky:BitmapData = Bitmap( new SkyboxSide() ).bitmapData;
-            var colorTransForm:ColorTransform = new ColorTransform( brightness, brightness, brightness );
-            newSky.colorTransform( _skyboxSide.rect, colorTransForm );
-
-            _skyBoxCubeMap = new CubeMap( newSky, newSky, _skyboxTopBottom, _skyboxTopBottom, newSky, newSky );
-            SkyBoxMaterial( _skybox.material ).cubeMap = _skyBoxCubeMap;
+            _mainObject.scaleX =
+                    _mainObject.scaleY =
+                            _mainObject.scaleZ = brightness * 150;
         }
 
     }
