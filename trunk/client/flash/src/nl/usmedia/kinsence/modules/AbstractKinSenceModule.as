@@ -30,8 +30,6 @@ package nl.usmedia.kinsence.modules
 
     import nl.usmedia.kinsence.IKinSenceCore;
 
-    import nl.usmedia.kinsence.modules.IKinSenceModule;
-
 
     /**
      * @author Pieter van de Sluis

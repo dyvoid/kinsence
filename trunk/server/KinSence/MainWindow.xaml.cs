@@ -527,6 +527,11 @@ namespace UsMedia.KinSence
             SkeletonImage.Source = null;
         }
 
+        private void inIPAddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
     }
 
 }
